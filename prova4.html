@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulado IV - CPA20</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Responsividade */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 70px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+
+      .question {
+        padding: 20px 15px;
+      }
+
+      .question p {
+        font-size: 1rem;
+      }
+
+      .alternativa {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+      }
+
+      .verificar-btn {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+      }
+
+      .resultado-texto {
+        font-size: 0.9rem;
+        margin-left: 3em;
+      }
+
+      .recomecar-btn {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+      }
+
+      .voltar-btn {
+        top: 15px;
+        left: 15px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .resultado-content {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .voltar-btn span {
+        display: none;
+      }
+
+      .voltar-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Barra de progresso -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Botão de voltar -->
+  <a href="index.html" class="voltar-btn">
+    <i class="fas fa-arrow-left"></i>
+    <span>Voltar</span>
+  </a>
+
+  <!-- Menu de resultados fixo -->
+  <div class="resultado-container" id="resultadoContainer">
+    <div class="resultado-content">
+      <div class="resultado-texto" id="resultadoTexto"></div>
+      <div class="recomecar-btn" onclick="recomecarProva()">
+        <i class="fas fa-redo"></i>
+        <span>Recomeçar</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Simulado IV - CPA20</h1>
+    <div id="quiz"></div>
+    <button class="verificar-btn" onclick="verificarProva()">
+      <i class="fas fa-check-circle"></i>
+      Verificar Respostas
+    </button>
+  </div>
+
+  <script>
+    const todasQuestoes = [
+      {
+        pergunta: "Conceder autorização de funcionamento às instituições financeiras e às instituições de pagamento componentes do Sistema de Pagamentos Brasileiro (SPB) é atribuição",
+        alternativas: [
+          "do Conselho Monetário Nacional (CMN).",
+          "do Ministério da Economia.",
+          "do Banco Central do Brasil (BACEN).",
+          "da Comissão de Valores Mobiliários (CVM)."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "É uma atividade que pode ser efetuada por uma corretora de títulos e valores mobiliários:",
+        alternativas: [
+          "intermediação de operações de câmbio.",
+          "crédito direto ao consumidor.",
+          "Securitização de recebíveis.",
+          "financiamento de capital de giro das empresas."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "Os Bancos Múltiplos, com carteira de investimento, podem\nI. atuar como agentes underwriters.\nII. captar recursos por meio de debêntures.\nIII. atuar no financiamento de capital de giro e fixo.\nEstá correto o que se afirma em",
+        alternativas: [
+          "I, apenas.",
+          "I e III, apenas.",
+          "I, II, III.",
+          "II, apenas."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Um banco múltiplo com carteiras de investimento e de crédito, financiamento e investimento é autorizado pelo Banco Central a",
+        alternativas: [
+          "captar recursos via depósitos à vista e realizar operações de compra e venda, por conta própria ou de terceiros, de títulos e valores mobiliários.",
+          "captar recursos via depósitos a prazo, mas não pode receber depósitos a vista.",
+          "intermediar operações de câmbio e participar do processo de emissão, subscrição para revenda e distribuição de títulos e valores mobiliários.",
+          "intermediar operações de câmbio, mas não pode administrar fundos de investimento."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Segundo a Comissão de Valores Mobiliários (CVM), são considerados investidores profissionais, dentre outros,\nI. as entidades abertas e fechadas de previdência complementar, independentemente do tamanho do seu patrimônio.\nII. os clubes de investimento, desde que tenham a carteira gerida por administrador de carteira de valores mobiliários autorizado pela CVM.\nIII. as pessoas físicas e jurídicas que atestem, por escrito, sua condição de investidor profissional e possuam investimentos financeiros em valor superior a R$ 1.000.000,00.\nEstá correto o que se afirma em",
+        alternativas: [
+          "I e II, apenas.",
+          "II e III, apenas.",
+          "I, apenas.",
+          "I, II e III."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "É uma atribuição da área de controles internos das instituições financeiras",
+        alternativas: [
+          "o desenvolvimento de cenários macroeconômicos que auxiliem o posicionamento da instituição no mercado.",
+          "a avaliação dos riscos de crédito de eventuais tomadores de recursos da instituição.",
+          "a exclusão de responsabilidades por parte dos profissionais que não sejam diretores estatutários dentro da instituição.",
+          "a segregação das atividades de forma que seja evitado o conflito de interesses."
+        ],
+        correta: 3
+      },
+      {
+        pergunta: "Segundo a Resolução n° 30 da CVM, os profissionais que fazem recomendação de produtos de investimento para clientes tem o dever, dentre outras atribuições, de verificar se\nI. a situação financeira do cliente é compatível com o produto, serviço ou operação apresentada.\nII. o produto, serviço ou operação é adequado aos objetivos de investimento do cliente.\nIII. o cliente possui conhecimento necessário para compreender os riscos relacionados ao produto, serviço ou operação apresentada.\nEstá correto o que se afirma em",
+        alternativas: [
+          "I e II, apenas.",
+          "I, II e III.",
+          "II e III, apenas.",
+          "I e III, apenas."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Faz parte da política de segurança de informação de uma instituição financeira,",
+        alternativas: [
+          "a perpetuação da configuração dos desenhos dos sistemas de informações a fim de permitir comparações entre as rentabilidades obtidas nos anos anteriores.",
+          "o bloqueio ao acesso pelos diretores não estatutários aos sistemas de informações.",
+          "a realização de testes periódicos de segurança para os sistemas de informações, em especial para os mantidos em meio eletrônico.",
+          "a realização de testes periódicos nos arquivos físicos, assegurando a autenticidade das informações mantidas e priorizando-as sobre aquelas em meio eletrônico."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "A legislação e regulamentação, que dispõem sobre os crimes de lavagem de dinheiro ou ocultação de bens, direitos e valores, define que",
+        alternativas: [
+          "a ocorrência de infração penal precedente não é necessária para que se caracterize um crime de lavagem de dinheiro.",
+          "as punições estabelecidas no Código Penal não se aplicam a esses crimes.",
+          "estão sujeitos às punições aplicáveis aos crimes previstos nessa legislação, todos que contribuem para qualquer uma das etapas do processo de lavagem de dinheiro.",
+          "o Banco Central é o único órgão competente para editar normativos referentes à prevenção e combate desses crimes."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Com a finalidade de prevenir o envolvimento do sistema financeiro em ilícitos, o cadastro dos clientes e as informações sobre as transações realizadas",
+        alternativas: [
+          "devem ser conservados durante o período mínimo de cinco anos a partir do encerramento da conta ou da conclusão da transação.",
+          "devem ser conservados durante o período mínimo de dez anos a partir do encerramento da conta ou da conclusão da transação.",
+          "são facultativos caso a operação seja realizada por pessoa jurídica que exerça atividades de promoção imobiliária ou compra e venda de imóveis.",
+          "devem ser implementados quando a instituição financeira assim julgar conveniente."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Segundo a Resolução n° 30 da CVM, é vedado às pessoas que fazem recomendação de produtos de investimento para clientes, recomendar produtos ou serviços quando",
+        alternativas: [
+          "as informações de perfil do cliente não estejam atualizadas.",
+          "o prazo de vencimento do produto não for informado.",
+          "o retorno esperado do produto, no seu vencimento, não for informado.",
+          "os dados pessoais sensíveis do cliente, segundo a Lei Geral de Proteção de Dados (LGPD), não estejam atualizados."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "É um exemplo da prática de insider trading quando um operador",
+        alternativas: [
+          "divulga informações sobre seus clientes para terceiros, buscando vantagens e ganhos pessoais.",
+          "utiliza informações divulgadas em fatos relevantes em benefício próprio.",
+          "utiliza informações privilegiadas em benefício próprio ou para beneficiar as carteiras de clientes que administra.",
+          "compra ações para sua carteira pessoal, ao identificar no sistema da bolsa significativas ordens de compra dessas ações."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Segundo a Teoria de Finanças Comportamentais, a estratégia adotada pelos investidores ao tomarem o primeiro preço de compra de uma ação como referência e, a partir desse preço estimar o desempenho futuro dessa ação, é uma consequência da aplicação da heurística denominada",
+        alternativas: [
+          "aversão ao risco.",
+          "disponibilidade.",
+          "ancoragem.",
+          "representatividade."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Sobre os crimes de lavagem de dinheiro, a lei vigente regulamenta que\nI. os depósitos de alto valor realizados em espécie em contas de clientes, que exerçam atividades comerciais relacionadas com a negociação de obras de arte e aeronaves, caracterizam-se como operações suspeitas.\nII. aqueles que se utilizarem de bens e valores provenientes de infração penal, em sua atividade econômica estão sujeitos a mesma pena de reclusão, de três a dez anos, e multa.\nIII. aqueles que exercem atividades de comercialização de imóveis ou joias e as administradoras de cartões de crédito estão sujeitas a essa lei.\nEstá correto o que se afirma em",
+        alternativas: [
+          "II e III, apenas.",
+          "I e II, apenas.",
+          "I e III, apenas.",
+          "I, II e III."
+        ],
+        correta: 3
+      },
+      {
+        pergunta: "A Circular Bacen 3.978/20 (e suas atualizações), no seu art. 18°, determina que as instituições autorizadas a funcionar pelo Banco Central do Brasil devem adotar procedimentos que permitam qualificar seus clientes por meio da coleta, verificação e validação de informações, compatíveis com o perfil de risco do cliente e com a natureza da relação de negócio. Em conformidade com as informações acima, está correto afirmar que\nI. a qualificação do cliente deve ser reavaliada de forma permanente, de acordo com a evolução da relação de negócio e do perfil de risco.\nII. os procedimentos de qualificação do cliente pessoa jurídica, devem incluir a análise da cadeia de participação societária até a identificação da pessoa natural caracterizada como seu beneficiário final.\nPode-se afirmar que I e II, respectivamente, estão",
+        alternativas: [
+          "incorreta e incorreta.",
+          "correta e correta.",
+          "correta e incorreta.",
+          "incorreta e correta."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "A identificação de temas relevantes, pelos investidores, para a análise ASG, pode se apoiar no processo de materialidade conduzido pelas empresas durante a elaboração de seu relato anual/de sustentabilidade. Nesse caso,",
+        alternativas: [
+          "a empresa deve divulgar todas as informações disponíveis sobre os temas materiais, identificados no relatório anual/de sustentabilidade para os seus investidores.",
+          "a definição da materialidade ASG pelos investidores envolve a avaliação do seu impacto na performance financeira da empresa.",
+          "a priorização dos temas ASG pelos investidores deve considerar as questões demandadas pelos stakeholders da companhia e reportadas no seu relatório anual/de sustentabilidade.",
+          "todo tema importante, identificado pela empresa, deve ser considerado relevante para os investidores."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "De acordo com o Código ANBIMA de Distribuição de Produtos de Investimento, para definição do objetivo de investimento do investidor, a instituição participante deve considerar, no mínimo, as seguintes informações:\nI - O valor de suas receitas regulares declaradas.\nII - O periodo em que será mantido o investimento.\nIII - As preferencias declaradas quanto a assunção de riscos.\nEstá correto o que se afirma em",
+        alternativas: [
+          "I, apenas.",
+          "I e II, apenas.",
+          "II e III, apenas.",
+          "I, II e III."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Um país que tem sua balança comercial superavitária significa que",
+        alternativas: [
+          "o total de bens exportados são superiores ao total de bens importados.",
+          "tenha um maior volume de remessas de lucros e juros de empréstimos enviados para o exterior.",
+          "o total de bens exportados são inferiores ao total de bens importados.",
+          "tenha um maior volume de remessas de lucros e juros de empréstimos vindos do exterior."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "Um investidor realiza uma aplicação num fundo de investimento e obtém rendimento nominal líquido (de impostos e demais custos e taxas) de 20% no período. Nesse mesmo intervalo de tempo, o IPCA (Índice Nacional de Preços ao Consumidor Amplo) acumulado foi de 25%. Então, esse investidor, com esta aplicação\nI - obteve um ganho real no período.\nII - perdeu poder de compra.\nAs afirmações I e II são, respectivamente:",
+        alternativas: [
+          "falsa e falsa.",
+          "falsa e verdadeira.",
+          "verdadeira e falsa.",
+          "verdadeira e verdadeira."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Um determinado título de renda fixa zero cupom tem seu valor de resgate de R$ 1.000,00 com vencimento em 12 meses. A taxa de juros do mercado para esse mesmo período é de 7,00% a.a. Nesse caso, o valor presente desse título é",
+        alternativas: [
+          "inferior a R$ 1.000,00.",
+          "igual a R$ 1.000,00.",
+          "impossível de ser determinado.",
+          "superior a R$ 1.000,00."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "O índice de Sustentabilidade Empresarial (ISE B3) da B3 avalia as empresas nas dimensões: capital humano, governança corporativa e alta gestão, modelo de negócio e inovação, capital social, meio ambiente e mudança do clima. A avaliação destas empresas para a formação da carteira do índice se dá por meio de",
+        alternativas: [
+          "metodologia específica do índice, que conta com questionário qualitativo e quantitativo respondido pelas empresas e avaliado por uma instituição independente.",
+          "informações ASG reportadas no Formulário de Referência das companhias, previstas na Resolução CVM 59, da Comissão de Valores Mobiliários.",
+          "banco de dados de informações ASG, organizado por um prestador de serviços em finanças sustentáveis e validado pela B3.",
+          "informações publicadas pelas empresas em relatórios corporativos e/ou de sustentabilidade, a partir da iniciativa Relate ou Explique, promovida pela B3."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "A agência de rating é contratada pela companhia emissora de debêntures e notas promissórias para",
+        alternativas: [
+          "avaliar a atuação do banco coordenador no processo da emissão.",
+          "confirmar todos os pagamentos e movimentações relativos à emissão.",
+          "elaborar uma análise independente sobre a capacidade de pagamento da companhia emissora.",
+          "assegurar aos investidores que a companhia emissora honrará seus compromissos."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Um investidor pessoa física vendeu ações em Bolsa de Valores, conforme demonstrado no quadro abaixo:\nDe acordo com a legislação do imposto sobre a renda vigente, os ganhos líquidos auferidos nessas alienações estão isentos do imposto nos meses de",
+        imagem: "assets/IV-questao_23.jpg",
+        alternativas: [
+          "novembro e dezembro de 2014.",
+          "dezembro de 2014 e janeiro de 2015.",
+          "novembro e dezembro de 2014 e fevereiro de 2015.",
+          "janeiro e fevereiro de 2015."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "Os titulos de crédito, nominativos, sem garantia real, que visam a levantar recursos de curto e médio prazo, emitidos exclusivamente por sociedades anônimas não financeiras denominam-se",
+        alternativas: [
+          "debêntures.",
+          "debêntures conversíveis em ações.",
+          "notas promissórias ou commercial paper.",
+          "ações."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Os contratos futuro de ações da B3,",
+        alternativas: [
+          "têm risco de contraparte.",
+          "são padronizados.",
+          "não exigem depósito de margem de garantia.",
+          "não possibilitam a alavancagem de resultados."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Uma oferta pública de um valor mobiliário, em que o banco coordenador assume o compromisso contratual, com a companhia emissora, de subscrever até a totalidade da emissão a um preço e condições previamente pactuados, encarregando-se, por sua conta e risco, de distribui-la no mercado é conhecida como",
+        alternativas: [
+          "colocação em regime de melhores esforços.",
+          "oferta com garantia firme.",
+          "oferta de lote residual.",
+          "bookbuilding."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Ao ocorrer um desdobramento de ações (split) de uma companhia aberta listada na B3",
+        alternativas: [
+          "não altera o patrimônio dos acionistas.",
+          "não altera a quantidade de ações dos acionistas.",
+          "reduz a quantidade de ações dos acionistas.",
+          "aumenta o preço da ação no mercado."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "Ao recomendar um título de renda fixa Tesouro IPCA+2024 (NTN-B Principal), um especialista de investimento deverá explicar ao seu cliente que\nI. ao manter o título até seu vencimento, a rentabilidade obtida será formada pela variação do IPCA e, também, pela taxa de juro do momento da aquisição.\nII. variações na Taxa Selic terão influência direta na rentabilidade, uma vez que o retorno é dado pela variação do IPCA mais a Taxa Selic.\nIII. em um ambiente econômico de alta inflacionária a rentabilidade real do investidor é mantida.\nEstá correto o que se afirma em",
+        alternativas: [
+          "I, II e III.",
+          "I e III, apenas.",
+          "II, apenas.",
+          "I, apenas."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "O lançador de uma call (opção de compra) europeia, sobre um certo ativo objeto, em seu vencimento",
+        alternativas: [
+          "tem a obrigação de vender o ativo objeto, se exercido pelo titular da call.",
+          "tem a opção de comprar o ativo objeto, se for de seu interesse.",
+          "tem a opção de vender o ativo objeto, se for de seu interesse.",
+          "tem a obrigação de comprar o ativo objeto, se exercido pelo titular da call."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "O Sistema de Pagamentos Brasileiro - SPB destina-se a promover a transferência",
+        alternativas: [
+          "de reservas bancárias que representem recursos próprios das instituições financeiras que possuam conta no Sistema de Transferência de Reservas - STR, em tempo real, com a consequente redução do risco sistêmico.",
+          "de fundos interbancários, próprios ou de terceiros, que podem ser liquidados, inclusive em tempo real, com a consequente redução do risco sistêmico.",
+          "de recursos financeiros próprios de instituições que pertençam a um mesmo conglomerado financeiro por meio da Câmara Interbancária de Pagamentos - CIP, em tempo real, com a consequente redução do risco sistêmico.",
+          "exclusiva de fundos entre os correntistas de um mesmo conglomerado financeiro, em tempo real, com a consequente redução do risco sistêmico."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Um investidor que adquire bônus de subscrição assume uma posição que equivale a uma",
+        alternativas: [
+          "venda de uma opção de venda.",
+          "compra de uma opção de venda.",
+          "compra de uma opção de compra.",
+          "venda de uma opção de compra."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Uma oferta pública primária de valores mobiliários",
+        alternativas: [
+          "é a operação de compra ou venda de ativos, vinculada a uma outra operação de transferência de titularidade.",
+          "caracteriza-se por ser extensiva aos não-acionistas da companhia.",
+          "é distribuida apenas aos não-acionistas da companhia.",
+          "é feita apenas aos acionistas, para subscrever novas ações a um preço determinado."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "O preço unitário (PU) de um título de renda fixa prefixado sem pagamentos periódicos de juros é o",
+        alternativas: [
+          "preço de negociação do título calculado em determinada data.",
+          "valor nominal atualizado.",
+          "valor presente dos cupons e do principal.",
+          "quociente entre o total dos cupons e o total das amortizações."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "Os ativos de renda variável se caracterizam por terem",
+        alternativas: [
+          "seus preços corrigidos por índices de mercado até sua data de vencimento.",
+          "sua remuneração previamente definida, na aquisição do ativo.",
+          "seus preços pós-fixados, corrigidos por taxas flutuantes até sua data de vencimento.",
+          "sua remuneração definida apenas no resgate da aplicação inicialmente feita."
+        ],
+        correta: 3
+      },
+      {
+        pergunta: "Com relação às modalidades de fundos de investimento definidos pela CVM, os fundos",
+        alternativas: [
+          "de renda variável, por determinação legal, não podem comprar cotas de outros fundos.",
+          "abertos são aqueles em que os cotistas podem solicitar o resgate das suas cotas a qualquer tempo.",
+          "de investimento imobiliário são constituídos na forma de condomínio aberto.",
+          "exclusivos são voltados para um segmento de mercado, como empresas do segmento bancário."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Calcula-se o valor da cota de um fundo de investimento",
+        alternativas: [
+          "multiplicando-se o valor do PL pela rentabilidade do Dida dia e dividindo-se pelo número de cotas existentes.",
+          "dividindo-se o valor do PL pelo número de cotistas.",
+          "dividindo-se o valor do PL pelo número de cotas existentes.",
+          "dividindo-se o valor do PL pelo número de cotas vendidas e multiplicando-se pelo número de cotistas."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Segundo a Comissão de Valores Mobiliários (CVM), o fundo de investimento que permite ao investidor conhecer o valor da cota no momento de sua aplicação é o",
+        alternativas: [
+          "Multimercado.",
+          "Cambial.",
+          "Renda Fixa.",
+          "Ações."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Ao explicar para seu cliente os três níveis da Classificação de Fundos ANIMA, um gerente afirmou-lhe que:\nI. O Nível 1 faz referência às classes definidas pela Comissão de Valores Mobiliários (CVM).\nII. O Nível 2 identifica os tipos de gestão e riscos.\nIII. O Nível 3 identifica as estratégias de investimento.\nEstá correto o que se afirma em",
+        alternativas: [
+          "I e III, apenas.",
+          "I e II, apenas.",
+          "I, apenas.",
+          "I, II e III."
+        ],
+        correta: 3
+      },
+      {
+        pergunta: "Em relação às diferentes modalidades dos fundos de investimento, os fundos",
+        alternativas: [
+          "fechados são aqueles em que os cotistas podem resgatar suas cotas a qualquer momento.",
+          "de renda fixa não podem adquirir ativos no exterior.",
+          "exclusivos são voltados para um segmento de mercado, como empresas do segmento de energia elétrica.",
+          "de ações podem comprar cotas de outros fundos."
+        ],
+        correta: 3
+      },
+      {
+        pergunta: "Um investidor que acredita em uma queda da taxa de juros maior que a do consenso de mercado, deve aplicar seus recursos em um fundo de investimento cuja carteira seja composta principalmente por",
+        alternativas: [
+          "títulos prefixados e títulos pós-fixados indexados à Taxa Selic.",
+          "títulos pós-fixados indexados ao Di e títulos prefixados.",
+          "títulos prefixados.",
+          "títulos pós-fixados indexados à Taxa Selic."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Em relação à tributação dos fundos de investimento imobiliário pelo imposto de renda, é correto afirmar que",
+        alternativas: [
+          "o imposto apurado deve ser recolhido pelo próprio titular das cotas, em 31 de junho e 31 de dezembro de cada ano.",
+          "trata-se de uma modalidade de aplicação isenta de imposto, para pessoa jurídica, sobre os ganhos de capital e/ou rendimentos na alienação ou resgate das cotas.",
+          "há dois tipos de fatos geradores: a distribuição dos lucros auferidos pelo fundo aos cotistas e a obtenção de ganhos de capital e rendimentos na alienação ou resgate de cotas.",
+          "os lucros auferidos pelo fundo e que sejam distribuídos aos cotistas devem ser tributados na fonte à alíquota de 15%."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Para um investidor pessoa física domiciliado e residente no Brasil,",
+        alternativas: [
+          "O Fundo de Ações estão sujeitos ao Imposto sobre Operações de crédito, câmbio e seguros ou relativas a títulos e valores mobiliários (IOF) decrescente, de acordo com o prazo de aplicação.",
+          "as perdas apuradas no Fundo de Ações podem ser utilizadas para a redução do Imposto de Renda devido sobre futuros ganhos em Fundo de Renda Fixa do mesmo administrador.",
+          "a aplicação de recursos em um Fundo de Renda Fixa de Longo Prazo e subsequente resgate em 270 dias corridos geram imposto de Renda à alíquota de 17,50% sobre os rendimentos.",
+          "os ganhos no Fundo Multimercado de Curto Prazo são tributados à alíquota mínima de 20,00% sobre os rendimentos gerados entre a aplicação e o resgate."
+        ],
+        correta: 3
+      },
+      {
+        pergunta: "Um investidor que acredita em uma queda da taxa de juros maior que a do consenso de mercado, deve aplicar seus recursos em um fundo de investimento cuja carteira seja composta principalmente por",
+        alternativas: [
+          "títulos pós-fixados indexados ao Di e títulos prefixados.",
+          "títulos pós-fixados indexados à Taxa Selic.",
+          "títulos prefixados.",
+          "títulos prefixados e títulos pós-fixados indexados à Taxa Selic."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Em um Fundo de Investimento em Direitos Creditórios (FIDC)\nI - as cotas subordinadas possuem maiores riscos, caso os créditos não sejam performados.\nII - são exigidos ratings (classificação de risco de agências de risco de mercado) apenas para as cotas sêniores.\nIII - as cotas seniores possuem prioridade para fins de pagamento de amortização e resgates.\nEstá correto o que se afirma em:",
+        alternativas: [
+          "II, apenas.",
+          "I e III, apenas.",
+          "II e III, apenas.",
+          "I, apenas."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "As classes tipificadas como Renda Fixa, Ações e Cambial são classificados a partir",
+        alternativas: [
+          "da composição da carteira em relação aos emissores dos títulos (públicos ou privados).",
+          "do principal fator de risco associado à sua carteira de títulos.",
+          "do prazo médio da sua carteira de títulos.",
+          "do seu parâmetro de referência (benchmark)."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Em relação à legislação do imposto de renda da Receita Federal, considere as seguintes afirmativas:\nI. Os fundos de investimento são classificados como fundos de curto prazo ou de longo prazo em função do tempo de permanência dos recursos aplicados pelos cotistas.\nII. Tanto nos fundos de curto prazo quanto nos de longo prazo há o recolhimento semestral do imposto de renda pelo administrador, por meio do resgate de cotas suficientes para o pagamento do imposto apurado, denominado \"come-cotas\".\nIII. A incidência do imposto sobre os rendimentos auferidos em fundos de investimento de curto e de longo prazo ocorrerá no último dia útil dos meses de maio e de novembro de cada ano, ou no resgate de suas cotas, o que ocorrer primeiro.\nEstá correto o que se afirma em",
+        alternativas: [
+          "I e III, apenas.",
+          "I e II, apenas.",
+          "I, II e III.",
+          "II e III, apenas."
+        ],
+        correta: 3
+      },
+      {
+        pergunta: "Um Fundo de Investimento que oferece diversificação, facilidade no balanceamento da carteira, possui cotas negociadas na Bolsa de Valores e é constituído sob a forma de condomínio aberto é o",
+        alternativas: [
+          "Fundo de Investimento em Participações (FIP).",
+          "Exchange Traded Funds (ETFs).",
+          "Fundo de Investimento imobiliário (FII).",
+          "Fundo de investimento em Direito Creditório (FIDC)."
+        ],
+        correta: 3
+      },
+      {
+        pergunta: "Um indivíduo, 56 anos, trabalhador da indústria, contratado pelo modelo celetista (CLT), contribui, há mais de 15 anos, em um plano de previdência complementar individual do tipo VGBL com regime de tributação regressiva. Em relação à renda de aposentadoria que poderá ser proporcionada por este plano,",
+        alternativas: [
+          "esse indivíduo já pode converter seu plano de previdência em renda mensal por toda a vida ou por um prazo pré-estabelecido.",
+          "ao completar 65 anos de idade, esse indivíduo deverá, obrigatoriamente, converter seu plano individual, em renda mensal.",
+          "esse individuo deve aguardar 60 meses após o início do recebimento da aposentadoria pelo INSS, para ter direito à renda mensal no plano individual.",
+          "esse indivíduo deverá aguardar sua aposentadoria pelo INSS, para solicitar a conversão para renda mensal, da reserva acumulada no seu plano individual."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "Em um plano de previdência complementar aberto do tipo Vida Gerador de Benefício Livre (VGBL) o investidor, durante a fase de diferimento (acumulação), assumirá o risco de crédito",
+        alternativas: [
+          "do custodiante do fundo de investimento (FIE).",
+          "do administrador da carteira do fundo de investimento (FIE).",
+          "das ações que fazem parte da carteira do fundo de investimento (FIE).",
+          "da seguradora proprietária do plano."
+        ],
+        correta: 3
+      },
+      {
+        pergunta: "O aumento da Duration de Macaulay de uma carteira de investimentos tem como consequência direta",
+        alternativas: [
+          "a diminuição da variação do valor da carteira em relação ao seu benchmark.",
+          "o aumento da sua sensibilidade à mudanças nas taxas de juros.",
+          "a diminuição da relação entre o seu desvio-padrão e sua variância.",
+          "o aumento da relação entre o seu rating e seu risco de crédito."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Um Fundo de Investimento em Ações deve aplicar em ações à vista; bônus ou recibos de subscrição; certificados de depósito de ações; cotas dos fundos de ações; cotas dos fundos de índice de ações; e Brazilian Depositary Receipts, classificados como níveis II e III, o percentual mínimo do Patrimônio Líquido (PL) de",
+        alternativas: [
+          "80%",
+          "95%",
+          "67%",
+          "51%"
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Um investidor residente e domiciliado no Brasil pretende iniciar seu planejamento de aposentadoria. Para indicar a modalidade adequada dos planos de previdência complementar dos Plano Gerador de Benefício Livre (PGBL) ou Vida Gerador de Benefício Livre (VGBL), um especialista de investimento deve questionar-lhe o",
+        alternativas: [
+          "tipo de renda e o modelo atual da Declaração do Imposto de Renda da Pessoa Física (IRPF).",
+          "modelo atual da Declaração do Imposto de Renda (IR) e o vinculo com o Instituto Nacional do Seguro Social (INSS).",
+          "valor da renda e o modelo atual da Declaração do Imposto de Renda da Pessoa Física (IRPF).",
+          "tipo de renda e as contribuições ao Regime Geral de Previdência Social (RGPS)."
+        ],
+        correta: 3
+      },
+      {
+        pergunta: "O risco de crédito de um título é estimado pela",
+        alternativas: [
+          "expectativa de queda no lucro do seu emissor.",
+          "variação de seu preço em relação a um determinado índice.",
+          "probabilidade de seu emissor não cumprir as obrigações de pagamento.",
+          "variação de seu preço."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Uma debênture foi emitida com cláusula de repactuação anual e rating A. Após 10 meses, a agência classificadora de risco alterou esse rating para AA.\nDado: taxa de juros da economia constante nesse período de tempo.\nNa repactuação dessa debênture, é de se esperar que",
+        alternativas: [
+          "a remuneração da debênture não se alterará.",
+          "a empresa negocie uma taxa de juros menor, em função do menor risco.",
+          "os investidores negociem uma taxa de juros maior, em função do maior risco.",
+          "o rating não influencie na remuneração da debênture."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Um investidor toma a decisão de zerar as posições de derivativos que possuía em sua carteira, influenciado por notícias de perdas significativas ocasionadas por esse instrumento. Entretanto, observa que o VaR das carteiras aumentou significativamente. Esse efeito, provavelmente, ocorreu devido",
+        alternativas: [
+          "à variação dos preços dos ativos que estavam sendo protegidos (hedgeados) pelos derivativos.",
+          "ao resultado fiscal gerado pela eliminação dos derivativos.",
+          "à redução do risco de mercado causado pela eliminação dos derivativos.",
+          "à diminuição da duration de Macaulay da carteira."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "Ao oferecer título da dívida brasileira no exterior cuja liquidação se realizará em dólares norte-americanos, o gerente de investimentos deverá comunicar a seu cliente que o título",
+        alternativas: [
+          "apresenta risco de crédito mitigado.",
+          "possui o risco soberano.",
+          "apresenta risco de crédito garantido pelo Tesouro Americano.",
+          "não possui o risco soberano."
+        ],
+        correta: 1
+      },
+      {
+        pergunta: "Conhecida apenas a variância dos retornos diários do preço de um título, pode-se determinar, imediatamente,",
+        alternativas: [
+          "o desvio padrão.",
+          "a correlação.",
+          "o coeficiente de determinação (R').",
+          "a covariância."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "Ao oferecer título da dívida brasileira no exterior cuja liquidação se realizará em dólares norte-americanos, o gerente de investimentos deverá comunicar a seu cliente que o título:",
+        alternativas: [
+          "possui o risco soberano.",
+          "apresenta risco de crédito garantido pelo Tesouro Americano.",
+          "apresenta risco de crédito mitigado.",
+          "não possui o risco soberano."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "Um investidor vende um Contrato Futuro de Boi Gordo negociado na Bolsa de Valores (B3). Para este cliente, representa risco de contraparte a",
+        alternativas: [
+          "câmara de compensação da B3.",
+          "corretora da contraparte compradora.",
+          "parte compradora",
+          "distribuidora que intermediou a negociação."
+        ],
+        correta: 0
+      },
+      {
+        pergunta: "O gráfico abaixo apresenta o risco e o retorno dos fundos A, B e C.\nÉ correto afirmar que o Índice de Sharpe do fundo",
+        imagem: "assets/IV-questao_60.jpg",
+        alternativas: [
+          "A < B e B > C",
+          "A > B e A > C",
+          "A < B e A < C",
+          "A > B e A > C"
+        ],
+        correta: 0
+      }
+    ];
+
+
+    let provaEntregue = false;
+
+    function atualizarProgresso() {
+      const totalQuestoes = todasQuestoes.length;
+      let respondidas = 0;
+
+      for (let i = 0; i < totalQuestoes; i++) {
+        if (document.querySelector(`input[name="q${i}"]:checked`)) {
+          respondidas++;
+        }
+      }
+
+      const progresso = (respondidas / totalQuestoes) * 100;
+      document.getElementById('progressBar').style.width = `${progresso}%`;
+    }
+
+    function carregarProva() {
+      const quizContainer = document.getElementById('quiz');
+      quizContainer.innerHTML = '';
+
+      todasQuestoes.forEach((questao, index) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+
+        // Adiciona o número e texto da pergunta
+        const pergunta = document.createElement('p');
+        pergunta.innerHTML = `<strong>Questão ${index + 1}</strong> - ${questao.pergunta.replace(/\n/g, '<br>')}`;
+        div.appendChild(pergunta);
+
+        // Adiciona a imagem se existir
+        if (questao.imagem) {
+          const imgContainer = document.createElement('div');
+          imgContainer.className = 'question-image';
+
+          const img = document.createElement('img');
+          img.src = questao.imagem;
+          img.alt = 'Imagem da questão';
+
+          imgContainer.appendChild(img);
+          div.appendChild(imgContainer);
+        }
+
+        // Container para alternativas
+        const alternativasContainer = document.createElement('div');
+        alternativasContainer.className = 'alternativas';
+
+        // Adiciona as alternativas
+        questao.alternativas.forEach((alt, i) => {
+          const label = document.createElement('label');
+          label.className = 'alternativa';
+
+          const radio = document.createElement('input');
+          radio.type = 'radio';
+          radio.name = `q${index}`;
+          radio.value = i;
+          radio.onchange = atualizarProgresso;
+
+          const textoAlternativa = document.createElement('span');
+          textoAlternativa.textContent = alt;
+
+          label.appendChild(radio);
+          label.appendChild(textoAlternativa);
+          alternativasContainer.appendChild(label);
+        });
+
+        div.appendChild(alternativasContainer);
+        quizContainer.appendChild(div);
+      });
+
+      document.querySelectorAll('.result').forEach(el => el.remove());
+      provaEntregue = false;
+      // Esconde o menu de resultados ao carregar nova prova
+      document.getElementById('resultadoContainer').style.display = 'none';
+      // Reseta a barra de progresso
+      document.getElementById('progressBar').style.width = '0%';
+    }
+
+    function verificarProva() {
+      if (provaEntregue) {
+        alert("Você já verificou esta prova.");
+        return;
+      }
+
+      const respostasUsuario = [];
+      let todasRespondidas = true;
+
+      for (let i = 0; i < todasQuestoes.length; i++) {
+        const selecionada = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selecionada) {
+          respostasUsuario[i] = parseInt(selecionada.value);
+        } else {
+          todasRespondidas = false;
+          break;
+        }
+      }
+
+      if (!todasRespondidas) {
+        alert("Por favor, responda todas as questões antes de verificar.");
+        return;
+      }
+
+      // Calcula os resultados
+      let acertos = 0;
+      todasQuestoes.forEach((questao, i) => {
+        const correta = questao.correta;
+        const respostaUsuario = respostasUsuario[i];
+
+        if (respostaUsuario === correta) {
+          acertos++;
+        }
+      });
+
+      const porcentagem = ((acertos / todasQuestoes.length) * 100).toFixed(1);
+
+      // Mostra o menu de resultados
+      const resultadoContainer = document.getElementById('resultadoContainer');
+      const resultadoTexto = document.getElementById('resultadoTexto');
+
+      resultadoTexto.innerHTML = `🎯 Você acertou ${acertos} de ${todasQuestoes.length} questões (${porcentagem}%)`;
+      resultadoContainer.style.display = 'block';
+
+      // Rola a página para o topo para ver o resultado
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Marca as respostas corretas/incorretas
+      const quizContainer = document.getElementById('quiz');
+      todasQuestoes.forEach((questao, i) => {
+        const div = quizContainer.children[i];
+        const correta = questao.correta;
+        const respostaUsuario = respostasUsuario[i];
+
+        const resultado = document.createElement('div');
+        if (respostaUsuario === correta) {
+          resultado.className = 'result correct';
+          resultado.innerHTML = '<i class="fas fa-check-circle"></i> Resposta correta!';
+        } else {
+          resultado.className = 'result incorrect';
+          resultado.innerHTML = `<i class="fas fa-times-circle"></i> Resposta incorreta. <strong>Correta:</strong> ${questao.alternativas[correta]}`;
+        }
+        div.appendChild(resultado);
+      });
+
+      provaEntregue = true;
+    }
+
+    function recomecarProva() {
+      carregarProva();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Inicia a prova quando a página carrega
+    window.onload = carregarProva;
+  </script>
+</body>
+
+</html>

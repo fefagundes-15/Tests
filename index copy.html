@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulado CPA20 - Prova 1</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Barra de progresso -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Botão de voltar -->
+  <a href="base.html" class="voltar-btn">
+    <i class="fas fa-arrow-left"></i>
+    <span>Voltar</span>
+  </a>
+
+  <!-- Menu de resultados fixo -->
+  <div class="resultado-container" id="resultadoContainer">
+    <div class="resultado-content">
+      <div class="resultado-texto" id="resultadoTexto"></div>
+      <div class="recomecar-btn" onclick="recomecarProva()">
+        <i class="fas fa-redo"></i>
+        <span>Recomeçar</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Simulado CPA20 - Prova 1</h1>
+    <div id="quiz"></div>
+    <button class="verificar-btn" onclick="verificarProva()">
+      <i class="fas fa-check-circle"></i>
+      Verificar Respostas
+    </button>
+  </div>
+
+  <script>
+    const todasQuestoes = [
+      {
+        pergunta: "Os Códigos da ANBIMA de Regulação e Melhores Práticas se aplicam, exclusivamente, às:",
+        alternativas: [
+          "administradoras de fundos de investimento.",
+          "instituições financeiras reguladas pelo Banco Central.",
+          "instituições associadas e às que aderirem voluntariamente.",
+          "instituições reguladas pela Comissão de Valores Mobiliários (CVM)."
+        ],
+        correta: 2
+      },
+      {
+        pergunta: "Um investidor adquiriu em uma agência bancária, na qual mantém sua conta corrente, um plano de previdência complementar do tipo Plano Gerador de Benefício Livre (PGBL). Além da própria seguradora contratada, ele poderá também obter esclarecimentos sobre as regras de composição da carteira desse plano com:",
+        alternativas: [
+          "Banco Central do Brasil (BACEN).",
+          "Superintendência Nacional de Previdência Complementar (PREVIC).",
+          "Superintendência de Seguros Privados (SUSEP).",
+          "Comissão de Valores Mobiliários (CVM)."
+        ],
+        correta: 2
+      }
+    ];
+
+    let provaEntregue = false;
+
+    function atualizarProgresso() {
+      const totalQuestoes = todasQuestoes.length;
+      let respondidas = 0;
+
+      for (let i = 0; i < totalQuestoes; i++) {
+        if (document.querySelector(`input[name="q${i}"]:checked`)) {
+          respondidas++;
+        }
+      }
+
+      const progresso = (respondidas / totalQuestoes) * 100;
+      document.getElementById('progressBar').style.width = `${progresso}%`;
+    }
+
+    function carregarProva() {
+      const quizContainer = document.getElementById('quiz');
+      quizContainer.innerHTML = '';
+
+      todasQuestoes.forEach((questao, index) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+
+        // Adiciona o número e texto da pergunta
+        const pergunta = document.createElement('p');
+        pergunta.innerHTML = `<strong>Questão ${index + 1}</strong> - ${questao.pergunta.replace(/\n/g, '<br>')}`;
+        div.appendChild(pergunta);
+
+        // Adiciona a imagem se existir
+        if (questao.imagem) {
+          const imgContainer = document.createElement('div');
+          imgContainer.className = 'question-image';
+
+          const img = document.createElement('img');
+          img.src = questao.imagem;
+          img.alt = 'Imagem da questão';
+
+          imgContainer.appendChild(img);
+          div.appendChild(imgContainer);
+        }
+
+        // Container para alternativas
+        const alternativasContainer = document.createElement('div');
+        alternativasContainer.className = 'alternativas';
+
+        // Adiciona as alternativas
+        questao.alternativas.forEach((alt, i) => {
+          const label = document.createElement('label');
+          label.className = 'alternativa';
+
+          const radio = document.createElement('input');
+          radio.type = 'radio';
+          radio.name = `q${index}`;
+          radio.value = i;
+          radio.onchange = atualizarProgresso;
+
+          const textoAlternativa = document.createElement('span');
+          textoAlternativa.textContent = alt;
+
+          label.appendChild(radio);
+          label.appendChild(textoAlternativa);
+          alternativasContainer.appendChild(label);
+        });
+
+        div.appendChild(alternativasContainer);
+        quizContainer.appendChild(div);
+      });
+
+      document.querySelectorAll('.result').forEach(el => el.remove());
+      provaEntregue = false;
+      // Esconde o menu de resultados ao carregar nova prova
+      document.getElementById('resultadoContainer').style.display = 'none';
+      // Reseta a barra de progresso
+      document.getElementById('progressBar').style.width = '0%';
+    }
+
+    function verificarProva() {
+      if (provaEntregue) {
+        alert("Você já verificou esta prova.");
+        return;
+      }
+
+      const respostasUsuario = [];
+      let todasRespondidas = true;
+
+      for (let i = 0; i < todasQuestoes.length; i++) {
+        const selecionada = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selecionada) {
+          respostasUsuario[i] = parseInt(selecionada.value);
+        } else {
+          todasRespondidas = false;
+          break;
+        }
+      }
+
+      if (!todasRespondidas) {
+        alert("Por favor, responda todas as questões antes de verificar.");
+        return;
+      }
+
+      // Calcula os resultados
+      let acertos = 0;
+      todasQuestoes.forEach((questao, i) => {
+        const correta = questao.correta;
+        const respostaUsuario = respostasUsuario[i];
+
+        if (respostaUsuario === correta) {
+          acertos++;
+        }
+      });
+
+      const porcentagem = ((acertos / todasQuestoes.length) * 100).toFixed(1);
+
+      // Mostra o menu de resultados
+      const resultadoContainer = document.getElementById('resultadoContainer');
+      const resultadoTexto = document.getElementById('resultadoTexto');
+
+      resultadoTexto.innerHTML = `🎯 Você acertou ${acertos} de ${todasQuestoes.length} questões (${porcentagem}%)`;
+      resultadoContainer.style.display = 'block';
+
+      // Rola a página para o topo para ver o resultado
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Marca as respostas corretas/incorretas
+      const quizContainer = document.getElementById('quiz');
+      todasQuestoes.forEach((questao, i) => {
+        const div = quizContainer.children[i];
+        const correta = questao.correta;
+        const respostaUsuario = respostasUsuario[i];
+
+        const resultado = document.createElement('div');
+        if (respostaUsuario === correta) {
+          resultado.className = 'result correct';
+          resultado.innerHTML = '<i class="fas fa-check-circle"></i> Resposta correta!';
+        } else {
+          resultado.className = 'result incorrect';
+          resultado.innerHTML = `<i class="fas fa-times-circle"></i> Resposta incorreta. <strong>Correta:</strong> ${questao.alternativas[correta]}`;
+        }
+        div.appendChild(resultado);
+      });
+
+      provaEntregue = true;
+    }
+
+    function recomecarProva() {
+      carregarProva();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Inicia a prova quando a página carrega
+    window.onload = carregarProva;
+  </script>
+</body>
+
+</html>
