@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulados CPA20</title>
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2c3e50;
+      --accent-color: #e74c3c;
+      --light-color: #f8f9fa;
+      --dark-color: #212529;
+      --text-color: #495057;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--light-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 1rem 0;
+    }
+
+    h1 {
+      color: var(--dark-color);
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      color: var(--text-color);
+      font-size: 1rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .provas-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .prova-card {
+      background: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .prova-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--primary-color);
+    }
+
+    .prova-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      color: var(--dark-color);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .card-description {
+      color: var(--text-color);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      font-weight: 500;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: auto;
+      padding: 1.5rem;
+      color: var(--text-color);
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Cores individuais para cada card */
+    .card-1::before {
+      background: #3498db;
+    }
+
+    .card-2::before {
+      background: #2ecc71;
+    }
+
+    .card-3::before {
+      background: #e74c3c;
+    }
+
+    .card-4::before {
+      background: #f39c12;
+    }
+
+    .card-5::before {
+      background: #9b59b6;
+    }
+
+    .card-6::before {
+      background: #1abc9c;
+    }
+
+    .card-7::before {
+      background: #d35400;
+    }
+
+    .card-8::before {
+      background: #34495e;
+    }
+
+    .card-1 .btn {
+      background: #3498db;
+    }
+
+    .card-2 .btn {
+      background: #2ecc71;
+    }
+
+    .card-3 .btn {
+      background: #e74c3c;
+    }
+
+    .card-4 .btn {
+      background: #f39c12;
+    }
+
+    .card-5 .btn {
+      background: #9b59b6;
+    }
+
+    .card-6 .btn {
+      background: #1abc9c;
+    }
+
+    .card-7 .btn {
+      background: #d35400;
+    }
+
+    .card-8 .btn {
+      background: #34495e;
+    }
+
+    .card-1 .btn:hover {
+      background: #2980b9;
+    }
+
+    .card-2 .btn:hover {
+      background: #27ae60;
+    }
+
+    .card-3 .btn:hover {
+      background: #c0392b;
+    }
+
+    .card-4 .btn:hover {
+      background: #e67e22;
+    }
+
+    .card-5 .btn:hover {
+      background: #8e44ad;
+    }
+
+    .card-6 .btn:hover {
+      background: #16a085;
+    }
+
+    .card-7 .btn:hover {
+      background: #a04000;
+    }
+
+    .card-8 .btn:hover {
+      background: #2c3e50;
+    }
+
+    .card-9::before {
+      background: #e84393; /* Cor rosa (pode alterar) */
+    }
+    .card-9 .btn {
+      background: #e84393;
+    }
+    .card-9 .btn:hover {
+      background: #fd79a8;
+    }
+    .prova-card:nth-child(9) {
+      animation-delay: 0.9s;
+    }
+
+    /* Media Queries para telas maiores */
+    @media (min-width: 576px) {
+      .provas-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .btn {
+        width: auto;
+      }
+    }
+
+    @media (min-width: 768px) {
+      html {
+        font-size: 17px;
+      }
+
+      .container {
+        padding: 2rem;
+      }
+
+      header {
+        margin-bottom: 3rem;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .provas-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .provas-container {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* Animações */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .prova-card {
+      animation: fadeIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    .prova-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .prova-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .prova-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .prova-card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .prova-card:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    .prova-card:nth-child(6) {
+      animation-delay: 0.6s;
+    }
+
+    .prova-card:nth-child(7) {
+      animation-delay: 0.7s;
+    }
+
+    .prova-card:nth-child(8) {
+      animation-delay: 0.8s;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Simulados CPA20</h1>
+      <p class="subtitle">Prepare-se para a certificação com nossos simulados completos em diferentes níveis de
+        dificuldade</p>
+    </header>
+
+    <div class="provas-container">
+      <!-- Prova 1 -->
+      <div class="prova-card card-1">
+        <div class="card-content">
+          <div class="card-icon">📊</div>
+          <h3 class="card-title">Simulado 1</h3>
+          <p class="card-description">Primeiro simulado completo com 60 questões sobre os principais tópicos da
+            certificação CPA20.</p>
+          <a href="prova1.html" class="btn">Iniciar Prova</a>
+        </div>
+      </div>
+
+      <!-- Prova 2 -->
+      <div class="prova-card card-2">
+        <div class="card-content">
+          <div class="card-icon">📈</div>
+          <h3 class="card-title">Simulado 2</h3>
+          <p class="card-description">Segundo simulado completo com 60 questões sobre os principais tópicos da
+            certificação CPA20.</p>
+          <a href="prova2.html" class="btn">Iniciar Prova</a>
+        </div>
+      </div>
+
+      <!-- Prova 3 -->
+      <div class="prova-card card-3">
+        <div class="card-content">
+          <div class="card-icon">📚</div>
+          <h3 class="card-title">Simulado 3</h3>
+          <p class="card-description">Terceiro simulado completo com 60 questões sobre os principais tópicos da
+            certificação CPA20.</p>
+          <a href="prova3.html" class="btn">Iniciar Prova</a>
+        </div>
+      </div>
+
+      <!-- Prova 4 -->
+      <div class="prova-card card-4">
+        <div class="card-content">
+          <div class="card-icon">💼</div>
+          <h3 class="card-title">Simulado 4</h3>
+          <p class="card-description">Quarto simulado completo com 60 questões sobre os principais tópicos da
+            certificação CPA20.</p>
+          <a href="prova4.html" class="btn">Iniciar Prova</a>
+        </div>
+      </div>
+
+      <!-- Prova 5 -->
+      <div class="prova-card card-5">
+        <div class="card-content">
+          <div class="card-icon">🏦</div>
+          <h3 class="card-title">Simulado 5</h3>
+          <p class="card-description">Quinto simulado completo com 60 questões sobre os principais tópicos da
+            certificação CPA20.</p>
+          <a href="prova5.html" class="btn">Iniciar Prova</a>
+        </div>
+      </div>
+
+      <!-- Prova 6 -->
+      <div class="prova-card card-6">
+        <div class="card-content">
+          <div class="card-icon">📝</div>
+          <h3 class="card-title">Simulado 6</h3>
+          <p class="card-description">Sexto simulado completo com 60 questões sobre os principais tópicos da
+            certificação CPA20.</p>
+          <a href="prova6.html" class="btn">Iniciar Prova</a>
+        </div>
+      </div>
+
+      <!-- Prova 7 -->
+      <div class="prova-card card-7">
+        <div class="card-content">
+          <div class="card-icon">🎯</div>
+          <h3 class="card-title">Simulado 7</h3>
+          <p class="card-description">Sétimo simulado completo com 60 questões sobre os principais tópicos da
+            certificação CPA20.</p>
+          <a href="prova7.html" class="btn">Iniciar Prova</a>
+        </div>
+      </div>
+
+      <!-- Prova 8 -->
+      <div class="prova-card card-8">
+        <div class="card-content">
+          <div class="card-icon">🔍</div>
+          <h3 class="card-title">Simulado 8</h3>
+          <p class="card-description">Oitavo simulado completo com 60 questões sobre os principais tópicos da
+            certificação CPA20.</p>
+          <a href="prova8.html" class="btn">Iniciar Prova</a>
+        </div>
+      </div>
+
+        <!-- Prova 9 -->
+    <div class="prova-card card-9">
+      <div class="card-content">
+        <div class="card-icon">🧠</div>
+          <h3 class="card-title">Simulado 9</h3>
+          <p class="card-description">Nono simulado completo com 60 questões sobre os principais tópicos da certificação CPA20.</p>
+          <a href="prova9.html" class="btn">Iniciar Prova</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Atualiza o ano atual no footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Melhoria de acessibilidade para os cards
+    document.querySelectorAll('.prova-card').forEach(card => {
+      card.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          card.querySelector('a').click();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

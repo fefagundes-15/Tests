@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado - ITEP Speaking</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Responsividade */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            .question {
+                padding: 20px 15px;
+            }
+
+            .question p {
+                font-size: 1rem;
+            }
+
+            .alternativa {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+
+            .verificar-btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+
+            .resultado-texto {
+                font-size: 0.9rem;
+                margin-left: 3em;
+            }
+
+            .recomecar-btn {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+
+            .voltar-btn {
+                top: 15px;
+                left: 15px;
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .resultado-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .voltar-btn span {
+                display: none;
+            }
+
+            .voltar-btn {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                justify-content: center;
+            }
+        }
+
+        .btn-toggle {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-toggle:hover {
+            background-color: var(--accent-color);
+        }
+
+        .resposta {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Botão de voltar -->
+    <a href="index-itep.html" class="voltar-btn">
+        <i class="fas fa-arrow-left"></i>
+        <span>Voltar</span>
+    </a>
+
+    <div class="container">
+        <h1>Simulado - ITEP Speaking</h1>
+        <p style="margin-bottom: 2em; color: #d30000;"><strong>Atualize a página para gerar novas questões.</strong></p>
+        <p><strong>DICAS:</strong> São duas perguntas, uma você tem 45 segundos para responder e a outra 1 minuto. Falar
+            o máximo possível, melhor acabar o tempo e você continuar falando do que parar de falar sem ter terminado o
+            tempo. As questões de 1 a 29 DESSE ARQUIVO são as que costumam cair no ITEP então foquem mais nessas para
+            estudo. E as outras questões (da 30 a 57) são as que a agentes costumam perguntar nas entrevistas.</p>
+
+        <div id="quiz"></div>
+    </div>
+
+    <script>
+        const todasQuestoes = [
+            {
+                pergunta: "What do you think about cameras to watch the au pair work?",
+                resposta: "I don’t mind having cameras in the house, I just wouldn’t think it’s cool to have a camera in my room because I need privacy."
+            },
+            {
+                pergunta: "What shouldn’t be an au pair responsibility?",
+                resposta: "The role of an au pair is to take care of the child and things related to them. I would think it’s wrong to act as a housekeeper."
+            },
+            {
+                pergunta: "In your free time, would you prefer to spend more time with your host family or your new friends?",
+                resposta: "I’d like a balance. I think spending time with the host family helps build a stronger bond, but it’s also important to make friends, explore, and experience the culture independently."
+            },
+            {
+                pergunta: "What did you like to do most at school and why?",
+                resposta: "Stay in the library with my friends, talking about the books we are reading."
+            },
+            {
+                pergunta: "Do you think it is important for children to take extraclasses after school? Why?",
+                resposta: "It depends on the child. Some children benefit from extraclasses like music or sports, but they also need time to play and relax. Overloading them can be stressful."
+            },
+            {
+                pergunta: "What do you think about children using electronic devices in childhood?",
+                resposta: "Technology can be useful for learning, but too much screen time can be unhealthy. It’s important to set limits and encourage outdoor activities, social interaction, and reading."
+            },
+            {
+                pergunta: "What do you think about the influence of cell phones, tablets, and notebooks on children’s daily lives?",
+                resposta: "Technology can be educational, but excessive use can affect social skills and physical activity. Parents and caregivers should help children find a balance."
+            },
+            {
+                pergunta: "How many hours a day do you think a child should be on a cell phone or computer?",
+                resposta: "It depends on the child’s age. For young kids, maybe 1 hour a day. Older children can have more time if it’s balanced with physical activity, homework, and family time."
+            },
+            {
+                pergunta: "What is your favorite holiday, and what do you like to do on it?",
+                resposta: "I love Christmas because I enjoy spending time with family, decorating, and exchanging gifts or Halloween because I like dressing up and having fun with friends."
+            },
+            {
+                pergunta: "If a child was not respecting the parents and the au pair, what would you do?",
+                resposta: "I would stay calm, talk to the child, and try to understand their feelings. I’d set clear expectations and, if needed, discuss it with the parents to find the best approach together."
+            },
+            {
+                pergunta: "What would you do if the children did not respect/obey you?",
+                resposta: "I would talk to the children and try to understand what is happening. If it continues, I would talk to the parents so they can have a conversation with the children."
+            },
+            {
+                pergunta: "If you had the opportunity, would you rather learn new skills from a chef or learn to cook by yourself?",
+                resposta: "I’d love to learn from a chef because they have professional techniques, but I also enjoy experimenting and learning on my own."
+            },
+            {
+                pergunta: "You are in college and need to choose between gastronomy and law, which would you choose?",
+                resposta: "Law, I’m currently studying computer science, and the field I want to pursue is cybersecurity, where it’s important to understand the laws."
+            },
+            {
+                pergunta: "Do you think it is important to practice sports in childhood and at what age?",
+                resposta: "Yes! Sports help children stay active, build social skills, and learn teamwork. They can start with simple activities as early as 3-4 years old."
+            },
+            {
+                pergunta: "What would you do if your kids wanted to play with electronics?",
+                resposta: "I’d allow it within limits, but I’d encourage other activities like playing outside, reading, or doing crafts to keep a healthy balance."
+            },
+            {
+                pergunta: "What are the benefits of having a pet?",
+                resposta: "Pets teach responsibility, companionship, and empathy. They also bring comfort and joy to families."
+            },
+            {
+                pergunta: "How important is it for children to learn a new culture?",
+                resposta: "Very important! It helps them develop open-mindedness, respect for diversity, and a better understanding of the world."
+            },
+            {
+                pergunta: "Why do you think it is important to read to children?",
+                resposta: "Reading helps with language development, creativity, and imagination. It’s also a great bonding activity."
+            },
+            {
+                pergunta: "How is the weather today?",
+                resposta: "(It depends on the day!) It’s sunny and warm or It’s cold and rainy."
+            },
+            {
+                pergunta: "How did your parents teach you what is right and wrong?",
+                resposta: "My parents taught me through conversation. My dad isn’t the type to scold me, only my mom did. She would always sit down and explain what I had done right or wrong."
+            },
+            {
+                pergunta: "What would you do if the child took off their seatbelt/safety belt?",
+                resposta: "I would stay calm and ask the child to put the seatbelt back on. I’d explain its importance for safety in simple terms. If needed, I’d stop the car until the seatbelt is on. Safety comes first."
+            },
+            {
+                pergunta: "Do you think it is important for children to play after school?",
+                resposta: "Yes! Play is essential for their development, creativity, and social skills."
+            },
+            {
+                pergunta: "Which Marvel character do you most identify with? Why?",
+                resposta: "I’d pick someone like Spider-Man because he’s responsible but still enjoys life, or Captain Marvel because she’s strong and determined."
+            },
+            {
+                pergunta: "Did you go to work or study today? How was your way there?",
+                resposta: "I don't work on weekends, I work from Monday to Friday, and I study online, so I do my activities during the week."
+            },
+            {
+                pergunta: "How would you teach children to speak your language?",
+                resposta: "I’d use fun activities like songs, games, and storytelling. Speaking with them daily in small phrases also helps."
+            },
+            {
+                pergunta: "How do you describe your childhood best friend?",
+                resposta: "I would describe Bianca as friendly, intelligent, an amazing person, and a great companion. She is one of the most important people in my life."
+            },
+            {
+                pergunta: "Tell me about a teacher that inspired you when you were a child. How did this teacher inspire you?",
+                resposta: "I had an amazing teacher in an introductory tech course during high school. She encouraged me based on my performance and helped me decide to pursue computer science."
+            },
+            {
+                pergunta: "Do you prefer a fixed or flexible schedule? Why?",
+                resposta: "I prefer a fixed schedule because I like having a well-defined and organized routine."
+            },
+            {
+                pergunta: "What is your opinion about an au pair teaching their native language to the host kids?",
+                resposta: "I think it’s a great opportunity! Learning a second language at a young age is beneficial, and it can be done naturally through daily activities."
+            }
+        ];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function carregarProva() {
+            const quizContainer = document.getElementById('quiz');
+            quizContainer.innerHTML = '';
+
+            shuffleArray(todasQuestoes);
+            const questoesSelecionadas = todasQuestoes.slice(0, 2);
+
+            questoesSelecionadas.forEach((questao, index) => {
+                const div = document.createElement('div');
+                div.className = 'question';
+
+                const pergunta = document.createElement('p');
+                pergunta.innerHTML = `<strong>Questão ${index + 1}</strong>: ${questao.pergunta}`;
+                div.appendChild(pergunta);
+
+                const resposta = document.createElement('div');
+                resposta.className = 'resposta';
+                resposta.innerHTML = questao.resposta;
+                div.appendChild(resposta);
+
+                const btnToggle = document.createElement('button');
+                btnToggle.className = 'btn-toggle';
+                btnToggle.innerHTML = 'Mostrar resposta';
+
+                btnToggle.onclick = () => {
+                    if (resposta.style.display === 'none') {
+                        resposta.style.display = 'block';
+                        btnToggle.innerHTML = 'Ocultar resposta';
+                    } else {
+                        resposta.style.display = 'none';
+                        btnToggle.innerHTML = 'Mostrar resposta';
+                    }
+                };
+
+                div.appendChild(btnToggle);
+                quizContainer.appendChild(div);
+            });
+        }
+
+        window.onload = carregarProva;
+    </script>
+</body>
+
+</html>
