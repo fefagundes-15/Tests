@@ -2,57 +2,223 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cronograma de Estudos - UNESP</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma UNESP - Analista de Informática II</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <header>
-        <h1>Cronograma de Estudos UNESP</h1>
-        <p class="subtitle">93 dias até a prova</p>
-    </header>
-
-    <main>
-        <div class="container">
-            <div id="calendar" class="calendar"></div>
-        </div>
-    </main>
-
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title"></h2>
-                <span class="close" onclick="closeModal()">&times;</span>
-            </div>
-
-            <div class="modal-body">
-                <div class="modal-info" id="modal-content"></div>
-
-                <div class="notes-section">
-                    <h3><i class="fas fa-edit"></i> Minhas Anotações</h3>
-                    <textarea id="notes-textarea" placeholder="Digite suas anotações aqui..."></textarea>
-                    <div class="notes-actions">
-                        <button id="save-notes" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Salvar Anotações
-                        </button>
-                        <span id="notes-status"></span>
+    <div class="container">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="title-section">
+                    <h1><i class="fas fa-calendar-alt"></i> Cronograma UNESP</h1>
+                    <div class="header-subtitle">
+                        <h2>Analista de Informática II - Desenvolvimento de Sistemas</h2>
+                        <div class="exam-info">
+                            <span class="exam-date"><i class="fas fa-bullseye"></i> 93 dias de estudo intensivo</span>
+                            <span class="exam-focus"><i class="fas fa-file-alt"></i> Foco total no Edital</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="modal-actions">
-                    <button id="toggle-btn" class="btn btn-success"></button>
-                    <button onclick="closeModal()" class="btn btn-secondary">Fechar</button>
+                <div class="header-controls">
+                    <div class="header-buttons">
+                        <button id="stats-btn" class="control-btn">
+                            <i class="fas fa-chart-bar"></i> Estatísticas
+                        </button>
+                        <button id="export-btn" class="control-btn">
+                            <i class="fas fa-download"></i> Exportar
+                        </button>
+                        <button id="today-btn" class="control-btn highlight">
+                            <i class="fas fa-calendar-day"></i> Hoje
+                        </button>
+                    </div>
+                    <input type="file" id="import-file" accept=".json" style="display: none;">
                 </div>
+            </div>
+
+            <div class="progress-summary">
+                <div class="progress-item">
+                    <span class="progress-label">Progresso Total</span>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="total-progress"></div>
+                        </div>
+                        <span class="progress-percent" id="total-percent">0%</span>
+                    </div>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-icon completed">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="completed-days">0</span>
+                            <span class="stat-label">Concluídos</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-item">
+                        <div class="stat-icon notes">
+                            <i class="fas fa-sticky-note"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="notes-days">0</span>
+                            <span class="stat-label">Anotações</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-item">
+                        <div class="stat-icon remaining">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="remaining-days">93</span>
+                            <span class="stat-label">Restantes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="controls-section">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="week-filter" class="filter-label">
+                            <i class="fas fa-filter"></i>
+                            <span>Filtrar por Semana</span>
+                        </label>
+                        <select id="week-filter" class="filter-select">
+                            <option value="all">Todas as semanas (1-13)</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="subject-filter" class="filter-label">
+                            <i class="fas fa-book"></i>
+                            <span>Filtrar por Matéria</span>
+                        </label>
+                        <select id="subject-filter" class="filter-select">
+                            <option value="all">Todas as matérias</option>
+                            <option value="portuguese">Português</option>
+                            <option value="math">Matemática</option>
+                            <option value="legislation">Legislação</option>
+                            <option value="java">Java/OOP</option>
+                            <option value="database">Banco de Dados</option>
+                            <option value="web">Tecnologias Web</option>
+                            <option value="simulado">Simulado</option>
+                            <option value="review">Revisão</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button id="reset-filters" class="btn-secondary">
+                            <i class="fas fa-redo"></i> Limpar Filtros
+                        </button>
+                        <button id="search-btn" class="btn-secondary">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="calendar-section">
+                <div id="calendar" class="calendar-grid">
+                    <!-- Calendário será gerado pelo JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Clique em qualquer dia para ver o plano de estudos detalhado</span>
+                </div>
+                <div class="footer-actions">
+                    <button onclick="scrollToToday()" class="footer-btn">
+                        <i class="fas fa-calendar-day"></i> Ir para Hoje
+                    </button>
+                    <button onclick="showKeyboardShortcuts()" class="footer-btn">
+                        <i class="fas fa-keyboard"></i> Atalhos
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal Principal -->
+    <div id="modal" class="modal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <div id="modal-title" class="modal-title-content"></div>
+                <button class="modal-close" onclick="closeModal()" aria-label="Fechar modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div id="modal-content" class="modal-main-content">
+                    <!-- Conteúdo será injetado pelo JavaScript -->
+                </div>
+
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <h3><i class="fas fa-edit"></i> Minhas Anotações</h3>
+                        <button id="save-notes" class="save-btn">
+                            <i class="fas fa-save"></i> Salvar
+                        </button>
+                    </div>
+                    <textarea id="notes-textarea"
+                        placeholder="Digite suas anotações, observações ou links úteis aqui..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <div class="action-group left">
+                        <button id="prev-day" class="nav-btn">
+                            <i class="fas fa-chevron-left"></i>
+                            <span>Dia Anterior</span>
+                        </button>
+                    </div>
+
+                    <div class="action-group center">
+                        <button id="toggle-btn" class="primary-action-btn">
+                            <i class="fas fa-play"></i>
+                            <span>Iniciar Estudo</span>
+                        </button>
+                    </div>
+
+                    <div class="action-group right">
+                        <button id="next-day" class="nav-btn">
+                            <span>Próximo Dia</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
 
-    <footer>
-        <p>© 2024 Cronograma de Estudos UNESP | Dados salvos no navegador</p>
-    </footer>
+    <!-- Modal de Estatísticas -->
+    <div id="stats-modal" class="stats-modal">
+        <div class="stats-modal-overlay" onclick="closeStatsModal()"></div>
+        <div class="stats-modal-container">
+            <!-- Conteúdo será injetado pelo JavaScript -->
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
