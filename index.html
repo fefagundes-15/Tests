@@ -4,131 +4,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial</title>
+    <title>Central de Provas</title>
     <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --light-color: #f8f9fa;
-            --dark-color: #212529;
-            --text-color: #495057;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--light-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 1.5rem;
-        }
-
-        header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
-            margin-bottom: 2rem;
-            padding: 1rem 0;
+            max-width: 500px;
+            width: 100%;
         }
 
         h1 {
-            color: var(--dark-color);
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
             font-weight: 700;
-            line-height: 1.2;
         }
 
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+        .subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
         }
 
-        .card {
-            background: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-            text-align: center;
-            padding: 2rem;
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            color: var(--dark-color);
-            margin-bottom: 1rem;
+        .exam-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.3rem;
             font-weight: 600;
-        }
-
-        .btn-card {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--primary-color);
-            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
             text-decoration: none;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
-            font-weight: 500;
+            color: white;
         }
 
-        .btn-card:hover {
-            background-color: var(--secondary-color);
+        .exam-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .exam-button:active {
             transform: translateY(-2px);
         }
+
+        .felipe-button {
+            background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+        }
+
+        .felipe-button:hover {
+            background: linear-gradient(135deg, #2a6bc5 0%, #00c2ef 100%);
+        }
+
+        .emilly-button {
+            background: linear-gradient(135deg, #C0392B 0%, #E74C3C 100%);
+        }
+
+        .emilly-button:hover {
+            background: linear-gradient(135deg, #B0291B 0%, #D73C2C 100%);
+        }
+
+        .icon {
+            font-size: 1.8rem;
+        }
+
+        .info-text {
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .exam-button {
+                padding: 18px 25px;
+                font-size: 1.2rem;
+            }
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
     <div class="container">
-        <header>
-            <h1>Bem-vindo(a) à página de simulados.</h1>
-            <p>Escolha sua opção abaixo para começar</p>
-        </header>
+        <h1>Central de Provas</h1>
+        <p class="subtitle">Selecione a área de estudos desejada</p>
 
-        <div class="card-container">
-            <!-- Card para Simulados -->
-            <div class="card">
-                <h2 class="card-title">CPA20</h2>
-                <a href="index-cpa20.html" class="btn-card">Iniciar</a>
-            </div>
+        <div class="buttons-container">
+            <a href="concurso-felipe.html" class="exam-button felipe-button">
+                <i class="fas fa-graduation-cap icon"></i>
+                <span>Provas Felipe</span>
+            </a>
 
-            <!-- Card para Nova Página -->
-            <div class="card">
-                <h2 class="card-title">AU PAIR ITEP</h2>
-                <a href="index-itep.html" class="btn-card">Iniciar</a>
-            </div>
+            <a href="concurso-emilly.html" class="exam-button emilly-button">
+                <i class="fas fa-book-open icon"></i>
+                <span>Provas Emilly</span>
+            </a>
         </div>
+
+        <p class="info-text">
+            Clique em um dos botões acima para acessar o cronograma de estudos específico.
+            Cada área contém materiais personalizados e organizados por data.
+        </p>
     </div>
+
+    <footer>
+        <p>© 2024 Central de Provas | Organização de Estudos</p>
+    </footer>
 </body>
 
 </html>
