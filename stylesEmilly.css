@@ -1,0 +1,947 @@
+:root {
+  --primary: #4361ee;
+  --primary-dark: #3a56d4;
+  --secondary: #7209b7;
+  --accent: #f72585;
+  --success: #4cc9f0;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --gray: #6c757d;
+  --light-gray: #e9ecef;
+  --phase1: #4361ee;
+  --phase2: #7209b7;
+  --phase3: #f72585;
+  --portugues: #4cc9f0;
+  --matematica: #7209b7;
+  --informatica: #ff6b35; /* NOVA COR PARA INFORMÁTICA */
+  --especificos: #f72585;
+  --completed: #38b000;
+  --in-progress: #ffb703;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.6;
+  color: var(--dark);
+  background-color: #f5f7ff;
+  padding-bottom: 50px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  padding: 2rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.05);
+  transform: rotate(30deg);
+}
+
+.header-content {
+  position: relative;
+  z-index: 2;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.logo i {
+  font-size: 2.5rem;
+  color: var(--success);
+}
+
+.logo h1 {
+  font-size: 2rem;
+}
+
+.header-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px 15px;
+  border-radius: 50px;
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Dashboard */
+.dashboard {
+  margin: 2rem 0;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 1.5rem;
+}
+
+.dashboard-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 5px solid var(--primary);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  color: var(--dark);
+}
+
+.card-title i {
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Weight Distribution */
+.weight-distribution {
+  margin: 3rem 0;
+}
+
+.weight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 1.5rem;
+}
+
+.weight-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.weight-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+}
+
+.weight-card.portugues::before {
+  background-color: var(--portugues);
+}
+
+.weight-card.matematica::before {
+  background-color: var(--matematica);
+}
+
+.weight-card.informatica::before {
+  background-color: var(--informatica);
+}
+
+.weight-card.especificos::before {
+  background-color: var(--especificos);
+}
+
+.weight-percentage {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.portugues .weight-percentage {
+  color: var(--portugues);
+}
+
+.matematica .weight-percentage {
+  color: var(--matematica);
+}
+
+.informatica .weight-percentage {
+  color: var(--informatica);
+}
+
+.especificos .weight-percentage {
+  color: var(--especificos);
+}
+
+/* Schedule Navigation */
+.schedule-nav {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin: 2rem 0;
+}
+
+.nav-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-bottom: 2px solid var(--light-gray);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.nav-tab {
+  padding: 10px 20px;
+  background: var(--light-gray);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  flex: 1;
+  min-width: 150px;
+  text-align: center;
+}
+
+.nav-tab:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.nav-tab.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* Schedule Content */
+.schedule-content {
+  display: none;
+}
+
+.schedule-content.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.week-title {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--primary);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 0;
+  gap: 10px;
+}
+
+.phase-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px 15px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.phase1-badge {
+  background-color: rgba(67, 97, 238, 0.2);
+  color: var(--phase1);
+}
+
+.phase2-badge {
+  background-color: rgba(114, 9, 183, 0.2);
+  color: var(--phase2);
+}
+
+.phase3-badge {
+  background-color: rgba(247, 37, 133, 0.2);
+  color: var(--phase3);
+}
+
+/* Schedule Table Responsive */
+.schedule-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+  background: white;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.schedule-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+}
+
+.schedule-table th {
+  background: var(--light-gray);
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--dark);
+  white-space: nowrap;
+}
+
+.schedule-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--light-gray);
+  vertical-align: top;
+  min-width: 150px;
+}
+
+.schedule-table tr:last-child td {
+  border-bottom: none;
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  position: relative;
+}
+
+.time-slot {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+
+.morning {
+  background-color: rgba(76, 201, 240, 0.15);
+  border-left: 3px solid var(--success);
+}
+
+.commute {
+  background-color: rgba(114, 9, 183, 0.1);
+  border-left: 3px solid var(--matematica);
+}
+
+.lunch {
+  background-color: rgba(56, 176, 0, 0.1);
+  border-left: 3px solid var(--completed);
+}
+
+.night {
+  background-color: rgba(247, 37, 133, 0.1);
+  border-left: 3px solid var(--accent);
+}
+
+.subject-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 5px;
+  white-space: nowrap;
+}
+
+.portugues-tag {
+  background-color: rgba(76, 201, 240, 0.2);
+  color: var(--portugues);
+}
+
+.matematica-tag {
+  background-color: rgba(114, 9, 183, 0.2);
+  color: var(--matematica);
+}
+
+.informatica-tag {
+  background-color: rgba(255, 107, 53, 0.2);
+  color: var(--informatica);
+}
+
+.especificos-tag {
+  background-color: rgba(247, 37, 133, 0.2);
+  color: var(--especificos);
+}
+
+/* Botões de dia concluído */
+.complete-day-btn {
+  background: var(--success);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  justify-content: center;
+}
+
+.complete-day-btn:hover {
+  background: #2da0d0;
+  transform: translateY(-2px);
+}
+
+.complete-day-btn.completed {
+  background: var(--completed);
+}
+
+.complete-day-btn.completed:hover {
+  background: #2e8b57;
+}
+
+/* Indicador de progresso na tabela */
+.day-completed-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--completed);
+  border-radius: 50%;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+/* Week Navigation */
+.week-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+.nav-week-btn {
+  padding: 10px 15px;
+  background: var(--light-gray);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 80px;
+  text-align: center;
+}
+
+.nav-week-btn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.nav-week-btn.active {
+  background: var(--primary);
+  color: white;
+}
+
+.nav-week-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Materials Section */
+.materials-section {
+  margin: 3rem 0;
+}
+
+.materials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 1.5rem;
+}
+
+.material-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.device-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.material-list {
+  list-style-type: none;
+}
+
+.material-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--light-gray);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.material-list li:last-child {
+  border-bottom: none;
+}
+
+.material-list i {
+  color: var(--primary);
+  min-width: 20px;
+}
+
+/* Print Button */
+.print-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 24px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+}
+
+.print-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+}
+
+/* Progress Section */
+.progress-section {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(76, 201, 240, 0.1);
+  border-radius: 10px;
+  border-left: 4px solid var(--success);
+}
+
+.progress-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.progress-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.progress-btn.complete {
+  background: var(--success);
+  color: white;
+}
+
+.progress-btn.reset {
+  background: var(--light-gray);
+  color: var(--dark);
+}
+
+.progress-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Date Info */
+.date-info {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(114, 9, 183, 0.1);
+  border-radius: 10px;
+  border-left: 4px solid var(--secondary);
+  font-size: 0.9rem;
+}
+
+/* Barra de progresso geral */
+.overall-progress {
+  margin: 20px 0;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background: var(--light-gray);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--success), var(--completed));
+  border-radius: 10px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+/* Seção de sincronização */
+.sync-section {
+  background: rgba(114, 9, 183, 0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--secondary);
+}
+
+.sync-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.sync-section-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 200px;
+  justify-content: center;
+}
+
+.sync-section-btn.export {
+  background: var(--secondary);
+  color: white;
+}
+
+.sync-section-btn.import {
+  background: var(--accent);
+  color: white;
+}
+
+.sync-section-btn.sync {
+  background: var(--primary);
+  color: white;
+}
+
+.sync-section-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal de sincronização */
+.sync-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.sync-modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.sync-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.sync-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.sync-btn.local {
+  background: var(--primary);
+  color: white;
+}
+
+.sync-btn.export {
+  background: var(--secondary);
+  color: white;
+}
+
+.sync-btn.import {
+  background: var(--accent);
+  color: white;
+}
+
+.sync-btn.reset {
+  background: #dc3545;
+  color: white;
+}
+
+.sync-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.sync-status {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+}
+
+.sync-status.success {
+  background: rgba(56, 176, 0, 0.1);
+  color: var(--completed);
+  display: block;
+}
+
+.sync-status.error {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  display: block;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--light-gray);
+  color: var(--gray);
+}
+
+/* Mobile Optimizations */
+.mobile-view {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .dashboard-grid,
+  .weight-grid,
+  .materials-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .nav-tab {
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-view {
+    display: none;
+  }
+
+  .mobile-view {
+    display: block;
+  }
+
+  .header-info {
+    flex-direction: column;
+  }
+
+  .info-item {
+    min-width: 100%;
+  }
+
+  .week-title {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .nav-tabs {
+    justify-content: center;
+  }
+
+  .nav-tab {
+    min-width: 100%;
+  }
+
+  .dashboard-grid,
+  .weight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .material-card {
+    padding: 1rem;
+  }
+
+  .progress-buttons {
+    flex-direction: column;
+  }
+
+  .progress-btn {
+    width: 100%;
+  }
+
+  .sync-buttons {
+    flex-direction: column;
+  }
+
+  .sync-section-btn {
+    min-width: 100%;
+  }
+
+  .complete-day-btn {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+
+  .progress-stats {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .logo h1 {
+    font-size: 1.5rem;
+  }
+
+  .card-value {
+    font-size: 1.5rem;
+  }
+
+  .weight-percentage {
+    font-size: 2rem;
+  }
+
+  .materials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .week-navigation {
+    flex-direction: column;
+  }
+
+  .nav-week-btn {
+    width: 100%;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .nav-tabs,
+  .print-btn,
+  .progress-section,
+  .sync-section,
+  .overall-progress,
+  .day-completion,
+  .complete-day-btn {
+    display: none;
+  }
+
+  .schedule-table-wrapper {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .schedule-table {
+    min-width: 100%;
+  }
+}
