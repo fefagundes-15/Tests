@@ -42,24 +42,31 @@ async function init() {
 // Carregar questões do arquivo JSON
 async function carregarQuestoes() {
   try {
-    // Se estiver usando um arquivo JSON externo, use fetch
-    // const response = await fetch('questoes.json');
-    // questoes = await response.json();
-
-    // Para este exemplo, usaremos as questões diretamente do JSON
-    // Em um ambiente real, você pode usar fetch para carregar o arquivo JSON
-    console.log("Carregando questões...");
-
-    // As questões serão carregadas do arquivo JSON
-    // Para este exemplo, vamos usar um placeholder
-    // Na implementação final, as questões virão do arquivo JSON
+    // Carregar do arquivo nocoesLicitacao.json
+    const response = await fetch("nocoesLicitacao.json");
+    if (!response.ok) {
+      throw new Error(`Erro HTTP: ${response.status}`);
+    }
+    questoes = await response.json();
+    console.log(`${questoes.length} questões carregadas do arquivo JSON`);
   } catch (error) {
-    console.error("Erro ao carregar questões:", error);
+    console.error("Erro ao carregar questões do JSON:", error);
+    console.log("Usando questões padrão como fallback");
+    // Usar questões padrão em caso de erro
+    questoes = questoesPadrao;
   }
 }
 
 // Iniciar o simulado
 function iniciarSimulado() {
+  // Verificar se temos questões disponíveis
+  if (questoes.length === 0) {
+    alert(
+      "Erro: Não foi possível carregar as questões. Por favor, recarregue a página."
+    );
+    return;
+  }
+
   // Selecionar 10 questões aleatórias
   selecionarQuestoesAleatorias();
 
@@ -79,13 +86,13 @@ function iniciarSimulado() {
 
 // Selecionar 10 questões aleatórias do banco
 function selecionarQuestoesAleatorias() {
-  // Se não tiver questões carregadas, use as do arquivo JSON
-  // Para fins de demonstração, vamos criar um array temporário
-  if (window.questoesJSON && window.questoesJSON.length > 0) {
-    questoes = window.questoesJSON;
-  } else {
-    // Usar questões padrão se não houver JSON carregado
-    questoes = questoesPadrao;
+  // Se não temos questões suficientes
+  if (questoes.length < totalQuestoes) {
+    console.warn(
+      `Apenas ${questoes.length} questões disponíveis, usando todas`
+    );
+    questoesSelecionadas = [...questoes];
+    return;
   }
 
   // Copiar array de questões
@@ -107,9 +114,7 @@ function gerarQuestoesNaPagina() {
 
   // Se o container não existir, criá-lo
   if (!container) {
-    const quizScreen = document.getElementById("quiz-screen");
     const questionHeader = document.querySelector(".question-header");
-    const navigation = document.querySelector(".navigation");
 
     // Remover elementos antigos
     const oldContainer = document.querySelector(".questions-container");
@@ -125,7 +130,27 @@ function gerarQuestoesNaPagina() {
 
   // Limpar container
   const containerEl = document.querySelector(".questions-container");
+  if (!containerEl) {
+    console.error("Não foi possível encontrar o container de questões");
+    return;
+  }
+
   containerEl.innerHTML = "";
+
+  // Verificar se temos questões selecionadas
+  if (questoesSelecionadas.length === 0) {
+    containerEl.innerHTML = `
+      <div class="error-message" style="text-align: center; padding: 40px; color: #dc3545;">
+        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+        <h3>Erro ao carregar questões</h3>
+        <p>Não foi possível carregar as questões do banco de dados.</p>
+        <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">
+          Recarregar página
+        </button>
+      </div>
+    `;
+    return;
+  }
 
   // Gerar cada questão
   questoesSelecionadas.forEach((questao, index) => {
@@ -138,7 +163,9 @@ function gerarQuestoesNaPagina() {
     headerDiv.className = "question-card-header";
 
     const numeroQuestao = document.createElement("h3");
-    numeroQuestao.textContent = `Questão ${index + 1} - ${questao.categoria}`;
+    numeroQuestao.textContent = `Questão ${index + 1} - ${
+      questao.categoria || "Licitação Pública"
+    }`;
 
     const statusQuestao = document.createElement("span");
     statusQuestao.className = "question-status";
@@ -151,14 +178,15 @@ function gerarQuestoesNaPagina() {
     // Texto da questão
     const perguntaDiv = document.createElement("div");
     perguntaDiv.className = "question-text-full";
-    perguntaDiv.textContent = questao.pergunta;
+    perguntaDiv.textContent = questao.pergunta || "Questão sem texto";
 
     // Container de alternativas
     const opcoesDiv = document.createElement("div");
     opcoesDiv.className = "options-container-full";
 
     // Adicionar cada alternativa
-    questao.alternativas.forEach((alternativa, altIndex) => {
+    const alternativas = questao.alternativas || [];
+    alternativas.forEach((alternativa, altIndex) => {
       const opcaoDiv = document.createElement("div");
       opcaoDiv.className = "option-full";
       opcaoDiv.dataset.questionIndex = index;
@@ -170,7 +198,7 @@ function gerarQuestoesNaPagina() {
 
       const textoOpcao = document.createElement("span");
       textoOpcao.className = "option-text-full";
-      textoOpcao.textContent = alternativa;
+      textoOpcao.textContent = alternativa || "Alternativa sem texto";
 
       opcaoDiv.appendChild(letraOpcao);
       opcaoDiv.appendChild(textoOpcao);
@@ -249,7 +277,6 @@ function atualizarProgresso() {
   const respondidas = respostasUsuario.filter(
     (resposta) => resposta !== null
   ).length;
-  const faltantes = totalQuestoes - respondidas;
   const progresso = (respondidas / totalQuestoes) * 100;
 
   // Atualizar barra de progresso
@@ -312,9 +339,12 @@ function finalizarSimulado() {
   let naoRespondidasContagem = 0;
 
   for (let i = 0; i < totalQuestoes; i++) {
-    if (respostasUsuario[i] === null) {
+    const respostaUsuario = respostasUsuario[i];
+    const respostaCorreta = questoesSelecionadas[i]?.correta;
+
+    if (respostaUsuario === null) {
       naoRespondidasContagem++;
-    } else if (respostasUsuario[i] === questoesSelecionadas[i].correta) {
+    } else if (respostaUsuario === respostaCorreta) {
       corretas++;
     } else {
       incorretas++;
@@ -349,7 +379,9 @@ function finalizarSimulado() {
 
   // Atualizar cor do círculo de pontuação
   const scoreCircle = document.querySelector(".score-circle");
-  scoreCircle.style.background = `conic-gradient(#2ecc71 0% ${porcentagem}%, #eee ${porcentagem}% 100%)`;
+  if (scoreCircle) {
+    scoreCircle.style.background = `conic-gradient(#2ecc71 0% ${porcentagem}%, #eee ${porcentagem}% 100%)`;
+  }
 
   // Gerar revisão das questões
   gerarRevisaoQuestoes(corretas, incorretas, naoRespondidasContagem);
@@ -366,7 +398,7 @@ function gerarRevisaoQuestoes(corretas, incorretas, naoRespondidas) {
   for (let i = 0; i < totalQuestoes; i++) {
     const questao = questoesSelecionadas[i];
     const respostaUsuario = respostasUsuario[i];
-    const respostaCorreta = questao.correta;
+    const respostaCorreta = questao?.correta;
 
     const questaoDiv = document.createElement("div");
     questaoDiv.className = `review-question ${
@@ -378,7 +410,9 @@ function gerarRevisaoQuestoes(corretas, incorretas, naoRespondidas) {
 
     const numeroQuestao = document.createElement("span");
     numeroQuestao.className = "review-question-number";
-    numeroQuestao.textContent = `Questão ${i + 1} - ${questao.categoria}`;
+    numeroQuestao.textContent = `Questão ${i + 1} - ${
+      questao?.categoria || "Licitação Pública"
+    }`;
 
     const statusQuestao = document.createElement("span");
     statusQuestao.className = "review-question-status";
@@ -399,13 +433,14 @@ function gerarRevisaoQuestoes(corretas, incorretas, naoRespondidas) {
 
     const perguntaDiv = document.createElement("div");
     perguntaDiv.className = "review-question-text";
-    perguntaDiv.textContent = questao.pergunta;
+    perguntaDiv.textContent = questao?.pergunta || "Questão não disponível";
 
     const opcoesDiv = document.createElement("div");
     opcoesDiv.className = "review-options";
 
     // Adicionar cada alternativa
-    questao.alternativas.forEach((alternativa, index) => {
+    const alternativas = questao?.alternativas || [];
+    alternativas.forEach((alternativa, index) => {
       const opcaoDiv = document.createElement("div");
       opcaoDiv.className = "review-option";
 
@@ -443,7 +478,7 @@ function gerarRevisaoQuestoes(corretas, incorretas, naoRespondidas) {
       letraOpcao.textContent = String.fromCharCode(65 + index) + ")";
 
       const textoOpcao = document.createElement("span");
-      textoOpcao.textContent = alternativa;
+      textoOpcao.textContent = alternativa || "Alternativa não disponível";
 
       opcaoDiv.appendChild(letraOpcao);
       opcaoDiv.appendChild(textoOpcao);
@@ -455,9 +490,13 @@ function gerarRevisaoQuestoes(corretas, incorretas, naoRespondidas) {
     explicacaoDiv.style.marginTop = "10px";
     explicacaoDiv.style.fontStyle = "italic";
     explicacaoDiv.style.color = "#6c757d";
-    explicacaoDiv.textContent = `Resposta correta: ${String.fromCharCode(
-      65 + respostaCorreta
-    )}`;
+    if (respostaCorreta !== undefined) {
+      explicacaoDiv.textContent = `Resposta correta: ${String.fromCharCode(
+        65 + respostaCorreta
+      )}`;
+    } else {
+      explicacaoDiv.textContent = "Resposta correta: Indisponível";
+    }
 
     questaoDiv.appendChild(headerDiv);
     questaoDiv.appendChild(perguntaDiv);
@@ -571,102 +610,107 @@ const questoesPadrao = [
 function adicionarEstilosDinamicos() {
   const style = document.createElement("style");
   style.textContent = `
-        .questions-container {
-            margin: 20px 0;
-        }
-        
-        .question-card-full {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-left: 5px solid #3498db;
-        }
-        
-        .question-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #dee2e6;
-        }
-        
-        .question-card-header h3 {
-            color: #2c3e50;
-            font-size: 1.2rem;
-            margin: 0;
-        }
-        
-        .question-status {
-            font-size: 0.9rem;
-            padding: 5px 10px;
-            border-radius: 15px;
-            background-color: #ffc107;
-            color: #856404;
-        }
-        
-        .question-status.responded {
-            background-color: #28a745;
-            color: white;
-        }
-        
-        .question-text-full {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-        
-        .options-container-full {
-            margin-bottom: 10px;
-        }
-        
-        .option-full {
-            background-color: #f8f9fa;
-            border: 2px solid #e1e5eb;
-            border-radius: 10px;
-            padding: 15px 20px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        
-        .option-full:hover {
-            background-color: #eef5ff;
-            border-color: #3498db;
-        }
-        
-        .option-full.selected {
-            background-color: #e1f0ff;
-            border-color: #3498db;
-        }
-        
-        .option-letter-full {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #3498db;
-            margin-right: 15px;
-            min-width: 30px;
-        }
-        
-        .option-text-full {
-            flex: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .question-card-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .question-status {
-                margin-top: 10px;
-            }
-        }
-    `;
-  document.head.appendChild(style);
+    .questions-container {
+      margin: 20px 0;
+    }
+    
+    .question-card-full {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 25px;
+      border-left: 5px solid #3498db;
+    }
+    
+    .question-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    .question-card-header h3 {
+      color: #2c3e50;
+      font-size: 1.2rem;
+      margin: 0;
+    }
+    
+    .question-status {
+      font-size: 0.9rem;
+      padding: 5px 10px;
+      border-radius: 15px;
+      background-color: #ffc107;
+      color: #856404;
+    }
+    
+    .question-status.responded {
+      background-color: #28a745;
+      color: white;
+    }
+    
+    .question-text-full {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    
+    .options-container-full {
+      margin-bottom: 10px;
+    }
+    
+    .option-full {
+      background-color: #f8f9fa;
+      border: 2px solid #e1e5eb;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .option-full:hover {
+      background-color: #eef5ff;
+      border-color: #3498db;
+    }
+    
+    .option-full.selected {
+      background-color: #e1f0ff;
+      border-color: #3498db;
+    }
+    
+    .option-letter-full {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #3498db;
+      margin-right: 15px;
+      min-width: 30px;
+    }
+    
+    .option-text-full {
+      flex: 1;
+    }
+    
+    @media (max-width: 768px) {
+      .question-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .question-status {
+        margin-top: 10px;
+      }
+    }
+  `;
+
+  // Verificar se já não adicionamos o estilo
+  if (!document.querySelector("style[data-simulado-style]")) {
+    style.setAttribute("data-simulado-style", "true");
+    document.head.appendChild(style);
+  }
 }
 
 // Inicializar o simulado quando a página carregar
@@ -674,10 +718,3 @@ document.addEventListener("DOMContentLoaded", function () {
   adicionarEstilosDinamicos();
   init();
 });
-
-// Adicionar verificação para garantir que o JSON está carregado
-if (window.questoesJSON) {
-  console.log(`${window.questoesJSON.length} questões carregadas do JSON`);
-} else {
-  console.log("Usando questões padrão");
-}
