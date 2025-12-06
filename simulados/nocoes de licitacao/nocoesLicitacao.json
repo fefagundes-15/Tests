@@ -1,0 +1,652 @@
+[
+    {
+        "id": 1,
+        "categoria": "Licitação Pública",
+        "pergunta": "Qual das modalidades de licitação é adequada para contratos de pequeno valor, conforme a Lei 8.666/93?",
+        "alternativas": [
+            "Concorrência",
+            "Tomada de Preços",
+            "Convite",
+            "Concurso",
+            "Leilão"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 2,
+        "categoria": "Licitação Pública",
+        "pergunta": "A dispensa de licitação é possível para obras e serviços de engenharia quando o valor não exceder:",
+        "alternativas": [
+            "R$ 50.000,00",
+            "R$ 100.000,00",
+            "R$ 150.000,00",
+            "R$ 200.000,00",
+            "R$ 250.000,00"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 3,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "De acordo com o Código de Ética Profissional do Serviço Público, o servidor deve:",
+        "alternativas": [
+            "Priorizar interesses pessoais em detrimento do interesse público",
+            "Usar informações privilegiadas em benefício próprio",
+            "Exercer suas atribuições com rapidez, perfeição e rendimento",
+            "Ocultar informações de interesse coletivo",
+            "Aceitar presentes de qualquer valor de pessoas interessadas em processos"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 4,
+        "categoria": "Comportamento Profissional",
+        "pergunta": "Qual das seguintes atitudes NÃO é compatível com o comportamento ético no serviço público?",
+        "alternativas": [
+            "Tratar os cidadãos com respeito e cortesia",
+            "Manter sigilo sobre informações confidenciais",
+            "Praticar nepotismo em contratações",
+            "Cumprir prazos estabelecidos para atendimento",
+            "Agir com imparcialidade nas decisões"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 5,
+        "categoria": "Licitação Pública",
+        "pergunta": "A modalidade de licitação entre quaisquer interessados para a venda de bens inservíveis é:",
+        "alternativas": [
+            "Pregão",
+            "Concurso",
+            "Leilão",
+            "Tomada de Preços",
+            "Convite"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 6,
+        "categoria": "Licitação Pública",
+        "pergunta": "Qual é a fase da licitação em que há a verificação dos requisitos de habilitação dos licitantes?",
+        "alternativas": [
+            "Fase de Julgamento",
+            "Fase de Credenciamento",
+            "Fase de Habilitação",
+            "Fase de Classificação",
+            "Fase de Homologação"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 7,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "A prática de utilizar cargo ou função pública para obter vantagens indevidas caracteriza:",
+        "alternativas": [
+            "Improbição administrativa",
+            "Conflito de interesses",
+            "Nepotismo",
+            "Corrupção passiva",
+            "Prevaricação"
+        ],
+        "correta": 3
+    },
+    {
+        "id": 8,
+        "categoria": "Comportamento Profissional",
+        "pergunta": "No serviço público, a organização do trabalho deve priorizar:",
+        "alternativas": [
+            "A conveniência pessoal do servidor",
+            "O cumprimento de metas quantitativas apenas",
+            "A eficiência e a qualidade do serviço prestado",
+            "A redução de custos a qualquer custo",
+            "A delegação total de responsabilidades"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 9,
+        "categoria": "Licitação Pública",
+        "pergunta": "A modalidade de licitação Pregão pode ser realizada:",
+        "alternativas": [
+            "Apenas presencialmente",
+            "Apenas eletronicamente",
+            "Presencialmente ou eletronicamente",
+            "Apenas para serviços",
+            "Apenas para compras"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 10,
+        "categoria": "Licitação Pública",
+        "pergunta": "A inexigibilidade de licitação ocorre quando:",
+        "alternativas": [
+            "O valor é inferior ao limite legal",
+            "Há urgência na contratação",
+            "Existe fornecedor único para o objeto",
+            "O objeto é de pequena complexidade",
+            "Há necessidade de contratação emergencial"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 11,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "Segundo a Lei de Improbidade Administrativa, o ato de improbidade que importa enriquecimento ilícito:",
+        "alternativas": [
+            "Não tem consequências patrimoniais",
+            "Sujeita o agente à perda dos bens acrescidos",
+            "É punido apenas com advertência",
+            "Prescreve em 2 anos",
+            "É considerado infração leve"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 12,
+        "categoria": "Comportamento Profissional",
+        "pergunta": "A capacidade de estabelecer prioridades no serviço público está relacionada principalmente a:",
+        "alternativas": [
+            "Atender primeiro aos colegas de trabalho",
+            "Concluir as tarefas mais fáceis primeiro",
+            "Identificar o que é mais importante e urgente",
+            "Realizar todas as tarefas simultaneamente",
+            "Delegar todas as atividades complexas"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 13,
+        "categoria": "Licitação Pública",
+        "pergunta": "Qual modalidade de licitação é obrigatória para contratos de grande vulto?",
+        "alternativas": [
+            "Convite",
+            "Tomada de Preços",
+            "Concorrência",
+            "Pregão",
+            "Leilão"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 14,
+        "categoria": "Licitação Pública",
+        "pergunta": "O edital de licitação deve conter, EXCETO:",
+        "alternativas": [
+            "As condições de pagamento",
+            "Os critérios de julgamento das propostas",
+            "As exigências de habilitação",
+            "A relação de dirigentes da empresa",
+            "O local e prazo para recebimento das propostas"
+        ],
+        "correta": 3
+    },
+    {
+        "id": 15,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "O princípio ético que exige que o servidor trate a todos com igualdade é:",
+        "alternativas": [
+            "Eficiência",
+            "Imparcialidade",
+            "Legalidade",
+            "Probidade",
+            "Publicidade"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 16,
+        "categoria": "Comportamento Profissional",
+        "pergunta": "Qual é a atitude CORRETA diante de um conflito de interesses no serviço público?",
+        "alternativas": [
+            "Ignorar o conflito se não for descoberto",
+            "Comunicar imediatamente ao superior",
+            "Resolver o conflito sem comunicar ninguém",
+            "Beneficiar-se da situação enquanto possível",
+            "Transferir a responsabilidade para colegas"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 17,
+        "categoria": "Licitação Pública",
+        "pergunta": "A fase de recurso administrativo na licitação ocorre:",
+        "alternativas": [
+            "Antes da abertura das propostas",
+            "Durante a habilitação dos licitantes",
+            "Após a homologação do resultado",
+            "Antes da publicação do edital",
+            "Durante a execução do contrato"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 18,
+        "categoria": "Licitação Pública",
+        "pergunta": "A fraude em licitação constitui crime previsto:",
+        "alternativas": [
+            "Apenas na Lei de Improbidade Administrativa",
+            "No Código Penal",
+            "Apenas na Lei de Licitações",
+            "No Código de Processo Civil",
+            "Na Constituição Federal"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 19,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "O servidor público que recebe vantagem indevida em razão do cargo pratica o crime de:",
+        "alternativas": [
+            "Prevaricação",
+            "Corrupção passiva",
+            "Peculato",
+            "Concussão",
+            "Contrabando"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 20,
+        "categoria": "Comportamento Profissional",
+        "pergunta": "A postura profissional adequada no atendimento ao público inclui:",
+        "alternativas": [
+            "Julgamento prévio das necessidades do cidadão",
+            "Uso de linguagem técnica em todas as situações",
+            "Escuta ativa e empatia",
+            "Atendimento preferencial a conhecidos",
+            "Limitação do tempo de atendimento"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 21,
+        "categoria": "Licitação Pública",
+        "pergunta": "O regime de execução indireta ocorre quando a administração:",
+        "alternativas": [
+            "Executa as obras com seus próprios servidores",
+            "Contrata empresa para execução da obra",
+            "Transfere a execução para outro órgão",
+            "Desiste da execução do objeto",
+            "Altera o objeto durante a execução"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 22,
+        "categoria": "Licitação Pública",
+        "pergunta": "A habilitação jurídica na licitação consiste em comprovar:",
+        "alternativas": [
+            "A regularidade fiscal",
+            "A capacidade técnica",
+            "A idoneidade financeira",
+            "A regularidade quanto às obrigações trabalhistas",
+            "A regularidade de registro no órgão competente"
+        ],
+        "correta": 4
+    },
+    {
+        "id": 23,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "O dever de prestar contas da administração pública é fundamentado no princípio da:",
+        "alternativas": [
+            "Eficiência",
+            "Publicidade",
+            "Legalidade",
+            "Moralidade",
+            "Impessoalidade"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 24,
+        "categoria": "Comportamento Profissional",
+        "pergunta": "A gestão do tempo no serviço público deve considerar:",
+        "alternativas": [
+            "Apenas os prazos legais",
+            "As urgências dos superiores",
+            "O equilíbrio entre importância e urgência",
+            "A quantidade de tarefas pendentes",
+            "A complexidade das atividades"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 25,
+        "categoria": "Licitação Pública",
+        "pergunta": "Qual modalidade é utilizada para escolha de trabalho técnico, científico ou artístico?",
+        "alternativas": [
+            "Tomada de Preços",
+            "Concurso",
+            "Leilão",
+            "Pregão",
+            "Convite"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 26,
+        "categoria": "Licitação Pública",
+        "pergunta": "A adjudicação na licitação significa:",
+        "alternativas": [
+            "A abertura do processo licitatório",
+            "A publicação do edital",
+            "A atribuição do objeto ao vencedor",
+            "A anulação do processo",
+            "A revogação da licitação"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 27,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "O ato de retardar ou deixar de praticar ato de ofício caracteriza:",
+        "alternativas": [
+            "Corrupção",
+            "Prevaricação",
+            "Peculato",
+            "Concussão",
+            "Tráfico de influência"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 28,
+        "categoria": "Comportamento Profissional",
+        "pergunta": "A comunicação eficaz no serviço público deve ser:",
+        "alternativas": [
+            "Sempre por escrito",
+            "Clara, objetiva e adequada ao público",
+            "Técnica e detalhada",
+            "Restrita ao mínimo necessário",
+            "Informal entre colegas"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 29,
+        "categoria": "Licitação Pública",
+        "pergunta": "A licitação na modalidade Convite deve contar com a participação de, no mínimo:",
+        "alternativas": [
+            "2 licitantes",
+            "3 licitantes",
+            "5 licitantes",
+            "10 licitantes",
+            "Não há mínimo definido"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 30,
+        "categoria": "Licitação Pública",
+        "pergunta": "O princípio da vinculação ao instrumento convocatório significa que:",
+        "alternativas": [
+            "O edital não pode ser alterado",
+            "Todos devem seguir o que está no edital",
+            "A administração pode alterar o objeto",
+            "Os licitantes podem propor alternativas",
+            "O julgamento é discricionário"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 31,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "O uso de informações privilegiadas para benefício próprio configura:",
+        "alternativas": [
+            "Prevaricação",
+            "Insider trading",
+            "Conflito de interesses",
+            "Abuso de autoridade",
+            "Nepotismo"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 32,
+        "categoria": "Comportamento Profissional",
+        "pergunta": "A capacidade de trabalhar em equipe no serviço público requer:",
+        "alternativas": [
+            "Competitividade entre os membros",
+            "Centralização das decisões",
+            "Cooperação e respeito mútuo",
+            "Individualismo nas realizações",
+            "Hierarquização rígida"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 33,
+        "categoria": "Licitação Pública",
+        "pergunta": "A Lei 14.133/2021 (Nova Lei de Licitações) estabelece quantas modalidades de licitação?",
+        "alternativas": [
+            "3 modalidades",
+            "4 modalidades",
+            "5 modalidades",
+            "6 modalidades",
+            "7 modalidades"
+        ],
+        "correta": 3
+    },
+    {
+        "id": 34,
+        "categoria": "Licitação Pública",
+        "pergunta": "Qual destes NÃO é um princípio básico da licitação pública?",
+        "alternativas": [
+            "Isonomia",
+            "Vinculação ao instrumento convocatório",
+            "Julgamento objetivo",
+            "Publicidade",
+            "Privacidade"
+        ],
+        "correta": 4
+    },
+    {
+        "id": 35,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "A conduta do servidor que fere a dignidade da pessoa humana viola o princípio da:",
+        "alternativas": [
+            "Legalidade",
+            "Moralidade",
+            "Eficiência",
+            "Publicidade",
+            "Impessoalidade"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 36,
+        "categoria": "Comportamento Profissional",
+        "pergunta": "A postura proativa no serviço público caracteriza-se por:",
+        "alternativas": [
+            "Aguardar orientações para todas as ações",
+            "Antecipar-se aos problemas e propor soluções",
+            "Seguir apenas o que está no regulamento",
+            "Transferir responsabilidades sempre que possível",
+            "Manter-se na zona de conforto"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 37,
+        "categoria": "Licitação Pública",
+        "pergunta": "A anulação da licitação por ilegalidade pode ser determinada:",
+        "alternativas": [
+            "Apenas pelo Tribunal de Contas",
+            "Pela administração ou pelo Poder Judiciário",
+            "Apenas pelo Ministério Público",
+            "Exclusivamente pelos licitantes",
+            "Apenas durante a fase de habilitação"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 38,
+        "categoria": "Licitação Pública",
+        "pergunta": "A carta-convite na licitação deve ser enviada a, no mínimo:",
+        "alternativas": [
+            "1 licitante da mesma localidade",
+            "2 licitantes da mesma localidade",
+            "3 licitantes da mesma localidade",
+            "3 licitantes de localidades diferentes",
+            "5 licitantes de localidades diferentes"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 39,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "A prática de favorecer parentes em concursos públicos ou nomeações caracteriza:",
+        "alternativas": [
+            "Corrupção",
+            "Prevaricação",
+            "Nepotismo",
+            "Peculato",
+            "Concussão"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 40,
+        "categoria": "Comportamento Profissional",
+        "pergunta": "A capacidade de adaptação a mudanças no serviço público é importante porque:",
+        "alternativas": [
+            "Permite resistir a novas metodologias",
+            "Facilita a manutenção do status quo",
+            "Contribui para a inovação e melhoria contínua",
+            "Evita a necessidade de capacitação",
+            "Reduz a interação com colegas"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 41,
+        "categoria": "Licitação Pública",
+        "pergunta": "Qual destes é um critério de julgamento de propostas na licitação?",
+        "alternativas": [
+            "Menor prazo de execução",
+            "Maior experiência do licitante",
+            "Menor preço",
+            "Maior número de funcionários",
+            "Localização geográfica"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 42,
+        "categoria": "Licitação Pública",
+        "pergunta": "O seguro-garantia na licitação tem por objetivo:",
+        "alternativas": [
+            "Assegurar o pagamento ao licitante",
+            "Garantir a fiel execução do contrato",
+            "Proteger a administração contra acidentes",
+            "Cobrir despesas com publicidade",
+            "Assegurar o fornecimento de materiais"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 43,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "O servidor que utiliza bem público em benefício próprio pratica:",
+        "alternativas": [
+            "Prevaricação",
+            "Corrupção passiva",
+            "Peculato",
+            "Concussão",
+            "Tráfico de influência"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 44,
+        "categoria": "Comportamento Profissional",
+        "pergunta": "A tomada de decisão ética no serviço público baseia-se em:",
+        "alternativas": [
+            "Apenas na legalidade formal",
+            "Exclusivamente na hierarquia",
+            "Nos valores pessoais do servidor",
+            "Na moralidade, legalidade e interesse público",
+            "Na conveniência do momento"
+        ],
+        "correta": 3
+    },
+    {
+        "id": 45,
+        "categoria": "Licitação Pública",
+        "pergunta": "A licitação dispensável para casos de emergência ou calamidade pública deve ser:",
+        "alternativas": [
+            "Justificada e publicada posteriormente",
+            "Realizada sem qualquer formalidade",
+            "Substituída por contrato direto",
+            "Realizada apenas com fornecedores cadastrados",
+            "Homologada pelo Tribunal de Contas"
+        ],
+        "correta": 0
+    },
+    {
+        "id": 46,
+        "categoria": "Licitação Pública",
+        "pergunta": "O prazo de validade das propostas na licitação deve ser de, no mínimo:",
+        "alternativas": [
+            "30 dias",
+            "45 dias",
+            "60 dias",
+            "90 dias",
+            "120 dias"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 47,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "A responsabilidade solidária na administração pública significa que:",
+        "alternativas": [
+            "Apenas o superior hierárquico responde",
+            "Todos envolvidos no ato podem ser responsabilizados",
+            "Apenas o autor material responde",
+            "A responsabilidade é exclusiva do Estado",
+            "Não há responsabilidade individual"
+        ],
+        "correta": 1
+    },
+    {
+        "id": 48,
+        "categoria": "Comportamento Profissional",
+        "pergunta": "A inteligência emocional no serviço público é importante para:",
+        "alternativas": [
+            "Ocultar sentimentos negativos",
+            "Manter distância emocional dos cidadãos",
+            "Gerenciar conflitos e relacionamentos interpessoais",
+            "Evitar envolvimento com as demandas",
+            "Priorizar apenas as tarefas técnicas"
+        ],
+        "correta": 2
+    },
+    {
+        "id": 49,
+        "categoria": "Licitação Pública",
+        "pergunta": "A reversão do processo licitatório ocorre quando:",
+        "alternativas": [
+            "Todos os licitantes são desclassificados",
+            "Há apenas um licitante habilitado",
+            "O objeto licitado perde sua finalidade",
+            "O vencedor desiste da adjudicação",
+            "Ocorre erro no edital"
+        ],
+        "correta": 0
+    },
+    {
+        "id": 50,
+        "categoria": "Ética no Serviço Público",
+        "pergunta": "O sigilo funcional no serviço público pode ser quebrado quando:",
+        "alternativas": [
+            "Conveniente para o servidor",
+            "Solicitado por colega de trabalho",
+            "Determinado por superior hierárquico",
+            "Exigido por interesse público superior",
+            "Pedido por familiar do servidor"
+        ],
+        "correta": 3
+    }
+]

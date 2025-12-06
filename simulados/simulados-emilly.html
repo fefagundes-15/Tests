@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulados para Concurso</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(52, 152, 219, 0.2);
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        h1 i {
+            color: #3498db;
+            margin-right: 15px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #95a5a6;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .back-button:hover {
+            background-color: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .simulados-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .simulado-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .simulado-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            border-color: #3498db;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .card-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-description {
+            margin-bottom: 20px;
+            color: #555;
+            flex: 1;
+        }
+
+        .card-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3498db;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .card-footer {
+            padding: 0 25px 25px;
+        }
+
+        .btn-start {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-start:hover {
+            background: linear-gradient(135deg, #27ae60, #219653);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .btn-disabled {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            cursor: not-allowed;
+        }
+
+        .btn-disabled:hover {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .coming-soon {
+            text-align: center;
+            margin-top: 50px;
+            padding: 40px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .coming-soon h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .coming-soon p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .future-simulados {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .future-tag {
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #7f8c8d;
+            border: 2px dashed #ddd;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        .card-available {
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .simulados-container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .card-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .card-header {
+                padding: 20px;
+            }
+
+            .card-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-graduation-cap"></i> Simulados para Concurso</h1>
+            <p class="subtitle">Pratique com simulados atualizados baseados em editais reais</p>
+            <a href="../concurso-emilly.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Voltar para o Simulado Atual
+            </a>
+        </header>
+
+        <div class="simulados-container">
+            <!-- Simulado Disponível -->
+            <div class="simulado-card card-available">
+                <div class="featured-badge">Disponível</div>
+                <div class="card-header">
+                    <h3>Noções de Licitação Pública</h3>
+                    <span class="card-badge">Conhecimentos Específicos</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">
+                        Simulado focado em Noções de Licitação Pública (fases, modalidades, dispensa e inexigibilidade)
+                        e Ética no Serviço Público. Ideal para concursos da área administrativa.
+                    </p>
+
+                    <div class="card-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">50</div>
+                            <div class="stat-label">Questões</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">10</div>
+                            <div class="stat-label">Por Simulado</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">60</div>
+                            <div class="stat-label">Minutos</div>
+                        </div>
+                    </div>
+
+                    <div class="card-tags">
+                        <span
+                            style="background-color: #e8f4fc; color: #2980b9; padding: 5px 10px; border-radius: 5px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px;">
+                            <i class="fas fa-gavel"></i> Licitação
+                        </span>
+                        <span
+                            style="background-color: #f0f7ff; color: #2980b9; padding: 5px 10px; border-radius: 5px; font-size: 0.9rem; display: inline-block; margin-bottom: 5px;">
+                            <i class="fas fa-scale-balanced"></i> Ética
+                        </span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="nocoes de licitacao/nocoesLicitacao.html" class="btn-start">
+                        <i class="fas fa-play-circle"></i> Iniciar Simulado
+                    </a>
+                </div>
+            </div>
+
+            <!-- Simulado Em Breve -->
+            <div class="simulado-card">
+                <div class="card-header" style="background: linear-gradient(135deg, #95a5a6, #7f8c8d);">
+                    <h3>Direito Administrativo</h3>
+                    <span class="card-badge">Em Breve</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">
+                        Simulado completo de Direito Administrativo com questões sobre atos administrativos, poderes
+                        administrativos, serviços públicos e responsabilidade civil do Estado.
+                    </p>
+
+                    <div class="card-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">-</div>
+                            <div class="stat-label">Questões</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">-</div>
+                            <div class="stat-label">Por Simulado</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">-</div>
+                            <div class="stat-label">Minutos</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: auto;">
+                        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 10px; text-align: center;">
+                            <i class="fas fa-clock" style="color: #95a5a6; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                            <p style="color: #7f8c8d; font-size: 0.9rem; margin: 0;">Disponível em breve</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn-start btn-disabled" disabled>
+                        <i class="fas fa-lock"></i> Em Breve
+                    </button>
+                </div>
+            </div>
+
+            <!-- Outro Simulado Em Breve -->
+            <div class="simulado-card">
+                <div class="card-header" style="background: linear-gradient(135deg, #95a5a6, #7f8c8d);">
+                    <h3>Português para Concursos</h3>
+                    <span class="card-badge">Em Breve</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">
+                        Simulado de Língua Portuguesa com foco em concursos públicos: interpretação de texto, gramática,
+                        crase, concordância, regência e pontuação.
+                    </p>
+
+                    <div class="card-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">-</div>
+                            <div class="stat-label">Questões</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">-</div>
+                            <div class="stat-label">Por Simulado</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">-</div>
+                            <div class="stat-label">Minutos</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: auto;">
+                        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 10px; text-align: center;">
+                            <i class="fas fa-clock" style="color: #95a5a6; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                            <p style="color: #7f8c8d; font-size: 0.9rem; margin: 0;">Disponível em breve</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn-start btn-disabled" disabled>
+                        <i class="fas fa-lock"></i> Em Breve
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="coming-soon">
+            <h2><i class="fas fa-rocket"></i> Mais Simulados em Desenvolvimento</h2>
+            <p>Estamos trabalhando para expandir nossa coleção de simulados. Em breve teremos mais áreas de conhecimento
+                disponíveis para você praticar.</p>
+
+            <div class="future-simulados">
+                <span class="future-tag">Raciocínio Lógico</span>
+                <span class="future-tag">Informática</span>
+                <span class="future-tag">Constituição Federal</span>
+                <span class="future-tag">Administração Pública</span>
+                <span class="future-tag">Controle Externo</span>
+                <span class="future-tag">Matemática Financeira</span>
+                <span class="future-tag">Legislação Específica</span>
+                <span class="future-tag">Atualidades</span>
+            </div>
+        </div>
+
+        <footer>
+            <p>Simulados para Concurso Público &copy; 2023 - Todos os direitos reservados</p>
+            <p>As questões são baseadas em editais reais e atualizadas periodicamente</p>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado para Concurso Público</title>
+    <link rel="stylesheet" href="nocoesLicitacao.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <!-- <h1><i class="fas fa-graduation-cap"></i> Simulado para Concurso Público</h1> -->
+            <!-- <p class="subtitle">Foco: Licitação Pública e Ética no Serviço Público</p> -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="stats">
+                <span id="current-question">1</span> de <span id="total-questions">10</span> questões
+            </div>
+        </header>
+
+        <main>
+            <div id="start-screen" class="screen active">
+                <div class="welcome-card">
+                    <h2>Bem-vindo ao Simulado!</h2>
+                    <p>Este simulado contém <strong>50 questões</strong> sobre:</p>
+                    <ul>
+                        <li>Noções de licitação pública (fases, modalidades, dispensa e inexigibilidade)</li>
+                        <li>Ética no serviço público</li>
+                        <li>Comportamento profissional, atitudes no serviço, organização do trabalho, prioridade em
+                            serviço</li>
+                    </ul>
+                    <p>Cada simulado apresentará <strong>10 questões aleatórias</strong> do banco de questões.</p>
+                    <button id="start-btn" class="btn-primary">
+                        <i class="fas fa-play"></i> Iniciar Simulado
+                    </button>
+                    <div class="instructions">
+                        <h3><i class="fas fa-info-circle"></i> Instruções:</h3>
+                        <ol>
+                            <li>Leia atentamente cada questão</li>
+                            <li>Selecione uma das alternativas</li>
+                            <li>Use os botões para navegar entre as questões</li>
+                            <li>Clique em "Finalizar Simulado" para ver seu resultado</li>
+                            <li>Após finalizar, você poderá ver quais errou e as respostas corretas</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quiz-screen" class="screen">
+                <div class="question-header">
+                    <h2>Simulado - Licitação Pública e Ética</h2>
+                    <div class="question-number">
+                        <span id="questions-answered">0</span> de <span id="total-questions">10</span> respondidas
+                    </div>
+                </div>
+
+                <!-- As questões serão geradas dinamicamente aqui pelo JavaScript -->
+
+                <div class="navigation-full">
+                    <button id="finish-btn" class="btn-danger">
+                        <i class="fas fa-flag-checkered"></i> Finalizar Simulado
+                    </button>
+                </div>
+            </div>
+
+            <div id="result-screen" class="screen">
+                <div class="result-card">
+                    <h2><i class="fas fa-chart-bar"></i> Resultado do Simulado</h2>
+
+                    <div class="score-container">
+                        <div class="score-circle">
+                            <span id="score-percentage">80%</span>
+                        </div>
+                        <div class="score-details">
+                            <h3>Você acertou <span id="correct-count">8</span> de <span id="total-answered">10</span>
+                                questões</h3>
+                            <p id="performance-message">Bom desempenho!</p>
+                        </div>
+                    </div>
+
+                    <div class="result-summary">
+                        <div class="summary-item correct">
+                            <span class="summary-label">Corretas:</span>
+                            <span class="summary-value" id="summary-correct">8</span>
+                        </div>
+                        <div class="summary-item incorrect">
+                            <span class="summary-label">Incorretas:</span>
+                            <span class="summary-value" id="summary-incorrect">2</span>
+                        </div>
+                        <div class="summary-item skipped">
+                            <span class="summary-label">Não respondidas:</span>
+                            <span class="summary-value" id="summary-skipped">0</span>
+                        </div>
+                    </div>
+
+                    <div class="review-section">
+                        <h3><i class="fas fa-list-check"></i> Revisão das Questões</h3>
+                        <div id="questions-review"></div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="restart-btn" class="btn-primary">
+                            <i class="fas fa-redo"></i> Fazer Novo Simulado
+                        </button>
+                        <button id="home-btn" class="btn-secondary">
+                            <i class="fas fa-home"></i> Voltar ao Início
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- <footer>
+            <p>Simulado para concurso público - Foco em Licitação Pública e Ética no Serviço Público</p>
+            <p>As questões são baseadas no edital do concurso e são para fins de estudo</p>
+        </footer> -->
+    </div>
+
+    <script src="nocoesLicitacao.json"></script>
+    <script src="nocoesLicitacao.js"></script>
+</body>
+
+</html>
