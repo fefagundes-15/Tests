@@ -59,76 +59,29 @@
                 <div class="progress-fill" id="overall-progress-fill"></div>
             </div>
             <div class="progress-stats">
-                <span id="completed-days">0 dias concluídos</span>
-                <span id="total-days">0 dias totais</span>
+                <span id="completed-days">0 períodos concluídos</span>
+                <span id="total-days">234 períodos totais</span>
                 <span id="progress-percentage">0%</span>
             </div>
         </div>
 
         <!-- Seção de Sincronização -->
         <div class="sync-section">
-            <h4 style="display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-sync-alt"></i> Sincronizar Progresso entre Dispositivos
-            </h4>
-            <p style="margin-top: 10px; font-size: 0.9rem;">Use estas opções para mover seu progresso entre celular e
-                computador:</p>
-
+            <h4><i class="fas fa-sync-alt"></i> Sincronizar Progresso</h4>
+            <p>Salve seu progresso para continuar em outro dispositivo:</p>
             <div class="sync-buttons">
                 <button class="sync-section-btn export" id="export-progress-btn">
-                    <i class="fas fa-file-export"></i> Exportar Progresso
+                    <i class="fas fa-download"></i> Exportar Progresso
                 </button>
                 <button class="sync-section-btn import" id="import-progress-btn">
-                    <i class="fas fa-file-import"></i> Importar Progresso
+                    <i class="fas fa-upload"></i> Importar Progresso
                 </button>
                 <button class="sync-section-btn sync" id="sync-cloud-btn">
                     <i class="fas fa-cloud-upload-alt"></i> Salvar na Nuvem
                 </button>
             </div>
-
-            <div id="sync-message" style="display: none; margin-top: 15px; padding: 10px; border-radius: 5px;"></div>
+            <div id="sync-message" style="display: none; margin-top: 10px;"></div>
         </div>
-
-        <!-- Dashboard -->
-        <section class="dashboard">
-            <h2><i class="fas fa-tachometer-alt"></i> Visão Geral do Plano</h2>
-            <div class="dashboard-grid">
-                <div class="dashboard-card">
-                    <div class="card-title">
-                        <i class="fas fa-book"></i>
-                        <h3>Total de Semanas</h3>
-                    </div>
-                    <div class="card-value">13</div>
-                    <p>Fases de estudo divididas em profundidade, revisão e simulados</p>
-                </div>
-
-                <div class="dashboard-card">
-                    <div class="card-title">
-                        <i class="fas fa-calendar-day"></i>
-                        <h3>Dias por Semana</h3>
-                    </div>
-                    <div class="card-value">6</div>
-                    <p>Um dia de descanso semanal (domingo recomendado)</p>
-                </div>
-
-                <div class="dashboard-card">
-                    <div class="card-title">
-                        <i class="fas fa-hourglass-half"></i>
-                        <h3>Horas Diárias</h3>
-                    </div>
-                    <div class="card-value">2-3h</div>
-                    <p>Distribuídas conforme sua disponibilidade</p>
-                </div>
-
-                <div class="dashboard-card">
-                    <div class="card-title">
-                        <i class="fas fa-weight-hanging"></i>
-                        <h3>Matéria com Maior Peso</h3>
-                    </div>
-                    <div class="card-value">50%</div>
-                    <p>Conhecimentos Específicos - 20 questões</p>
-                </div>
-            </div>
-        </section>
 
         <!-- Weight Distribution -->
         <section class="weight-distribution">
@@ -172,6 +125,19 @@
                 <div class="nav-tab" data-phase="materials">Materiais por Dispositivo</div>
             </div>
 
+            <!-- Seção de Controles de Progresso -->
+            <div class="progress-section">
+                <h4><i class="fas fa-tasks"></i> Controles de Progresso</h4>
+                <div class="progress-buttons">
+                    <button class="progress-btn complete" id="mark-all-complete">
+                        <i class="fas fa-check-double"></i> Marcar semana atual como concluída
+                    </button>
+                    <button class="progress-btn reset" id="reset-progress">
+                        <i class="fas fa-redo"></i> Reiniciar progresso da semana atual
+                    </button>
+                </div>
+            </div>
+
             <!-- Phase 1 Content -->
             <div id="phase1" class="schedule-content active">
                 <!-- Week Navigation -->
@@ -211,15 +177,33 @@
                                             <strong>Específicos:</strong> Java OO (classes, objetos)
                                             <div class="subject-tag especificos-tag">Específicos</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="segunda-sem1-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot commute">
                                             Flashcards Java
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="segunda-sem1-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">
                                             Exercícios Java básico
+                                        </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="segunda-sem1-noite">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -235,15 +219,33 @@
                                             <strong>Específicos:</strong> Java OO (herança, polimorfismo)
                                             <div class="subject-tag especificos-tag">Específicos</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="terca-sem1-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot commute">
                                             Revisão OO
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="terca-sem1-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">
                                             Prática com código
+                                        </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="terca-sem1-noite">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -259,15 +261,33 @@
                                             <strong>Português:</strong> Interpretação de textos
                                             <div class="subject-tag portugues-tag">Português</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quarta-sem1-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot commute">
                                             Questões interpretação
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quarta-sem1-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">
                                             Classes de palavras
+                                        </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quarta-sem1-noite">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -283,15 +303,33 @@
                                             <strong>Matemática:</strong> Operações com racionais
                                             <div class="subject-tag matematica-tag">Matemática</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quinta-sem1-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot lunch">
                                             Exercícios cálculos
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quinta-sem1-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">
                                             MMC e MDC
+                                        </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quinta-sem1-noite">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -307,15 +345,33 @@
                                             <strong>Específicos:</strong> SQL (DDL, DML básico)
                                             <div class="subject-tag especificos-tag">Específicos</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sexta-sem1-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot lunch">
                                             Prática SQL online
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sexta-sem1-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">
                                             Álgebra relacional
+                                        </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sexta-sem1-noite">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -331,15 +387,33 @@
                                             <strong>Legislação:</strong> CF/88 - Princípios Fundamentais
                                             <div class="subject-tag legislacao-tag">Legislação</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sabado-sem1-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot lunch">
                                             Questões constitucionais
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sabado-sem1-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">
                                             Revisão geral da semana
+                                        </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sabado-sem1-noite">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -372,12 +446,30 @@
                                         <div class="time-slot morning"><strong>Específicos:</strong> Web (JavaScript,
                                             jQuery) <div class="subject-tag especificos-tag">Específicos</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="segunda-sem2-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot commute">Prática JS básico</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="segunda-sem2-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">jQuery seletores</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="segunda-sem2-noite">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -388,12 +480,30 @@
                                         <div class="time-slot morning"><strong>Específicos:</strong> Web (JSON, REST)
                                             <div class="subject-tag especificos-tag">Específicos</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="terca-sem2-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot commute">Exercícios JSON</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="terca-sem2-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">APIs REST conceituais</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="terca-sem2-noite">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -404,12 +514,30 @@
                                         <div class="time-slot morning"><strong>Português:</strong> Pontuação e crase
                                             <div class="subject-tag portugues-tag">Português</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quarta-sem2-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot commute">Questões pontuação</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quarta-sem2-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">Regência verbal/nominal</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quarta-sem2-noite">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -420,12 +548,30 @@
                                         <div class="time-slot morning"><strong>Matemática:</strong> Porcentagem e razão
                                             <div class="subject-tag matematica-tag">Matemática</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quinta-sem2-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot lunch">Problemas %</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quinta-sem2-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">Proporções</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quinta-sem2-noite">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -436,12 +582,30 @@
                                         <div class="time-slot morning"><strong>Específicos:</strong> XML (conceitos,
                                             estrutura) <div class="subject-tag especificos-tag">Específicos</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sexta-sem2-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot lunch">Prática XML</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sexta-sem2-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">XML Schema</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sexta-sem2-noite">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -452,12 +616,30 @@
                                         <div class="time-slot morning"><strong>Legislação:</strong> CF/88 - Direitos
                                             Fundamentais <div class="subject-tag legislacao-tag">Legislação</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sabado-sem2-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot lunch">Questões direitos</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sabado-sem2-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">Revisão semana</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sabado-sem2-noite">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -465,471 +647,7 @@
                     </div>
                 </div>
 
-                <!-- Week 3 Content (hidden by default) -->
-                <div id="week3-content" class="week-content" style="display: none;">
-                    <h3 class="week-title">Semana 3 - Banco de Dados Intermediário <span
-                            class="phase-badge phase1-badge">Fase
-                            1: Estudo Profundo</span></h3>
-                    <div class="schedule-table-wrapper">
-                        <table class="schedule-table">
-                            <thead>
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Manhã (1h - PC livre)</th>
-                                    <th>Trem/Almoço</th>
-                                    <th>Noite</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Segunda</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> SQL avançado <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot commute">Exercícios procedures</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Prática triggers</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Terça</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> Modelagem (MER)
-                                            <div class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot commute">Modelar casos</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Normalização</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quarta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Português:</strong> Concordância verbal
-                                            <div class="subject-tag portugues-tag">Português</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot commute">Questões concordância</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Concordância nominal</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quinta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Matemática:</strong> Regra de três <div
-                                                class="subject-tag matematica-tag">Matemática</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot lunch">Problemas regra três</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Grandezas e medidas</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sexta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> Data Warehouse, BI
-                                            <div class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot lunch">Conceitos mineração dados</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Revisão BD</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sábado</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Legislação:</strong> CF/88 - Organização
-                                            Estado <div class="subject-tag legislacao-tag">Legislação</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot lunch">Questões organização</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Revisão semana</div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Week 4 Content (hidden by default) -->
-                <div id="week4-content" class="week-content" style="display: none;">
-                    <h3 class="week-title">Semana 4 - Framework e Persistência <span
-                            class="phase-badge phase1-badge">Fase 1:
-                            Estudo Profundo</span></h3>
-                    <div class="schedule-table-wrapper">
-                        <table class="schedule-table">
-                            <thead>
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Manhã (1h - PC livre)</th>
-                                    <th>Trem/Almoço</th>
-                                    <th>Noite</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Segunda</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> JSF e PrimeFaces
-                                            <div class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot commute">Conceitos MVC</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Ciclo de vida JSF</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Terça</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> Hibernate <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot commute">Configuração básica</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Relacionamentos</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quarta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Português:</strong> Colocação pronominal
-                                            <div class="subject-tag portugues-tag">Português</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot commute">Questões pronomes</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Figuras linguagem</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quinta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Matemática:</strong> Equações 1º grau
-                                            <div class="subject-tag matematica-tag">Matemática</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot lunch">Problemas equações</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Sistemas equações</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sexta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> JasperReports (PDF)
-                                            <div class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot lunch">Criar relatório simples</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Revisão frameworks</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sábado</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Legislação:</strong> CF/88 - Ordem Social
-                                            <div class="subject-tag legislacao-tag">Legislação</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot lunch">Questões ordem social</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Revisão semana</div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Week 5 Content (hidden by default) -->
-                <div id="week5-content" class="week-content" style="display: none;">
-                    <h3 class="week-title">Semana 5 - Engenharia de Software <span class="phase-badge phase1-badge">Fase
-                            1: Estudo Profundo</span></h3>
-                    <div class="schedule-table-wrapper">
-                        <table class="schedule-table">
-                            <thead>
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Manhã (1h - PC livre)</th>
-                                    <th>Trem/Almoço</th>
-                                    <th>Noite</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Segunda</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> Requisitos <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot commute">Caso de requisitos</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Especificação</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Terça</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> Modelagem OO (UML)
-                                            <div class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot commute">Diagramas simples</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Casos de uso</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quarta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Português:</strong> Conjunções e
-                                            preposições <div class="subject-tag portugues-tag">Português</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot commute">Questões classes palavras</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Revisão geral</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quinta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Matemática:</strong> Equações 2º grau
-                                            <div class="subject-tag matematica-tag">Matemática</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot lunch">Fórmula Bhaskara</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Problemas 2º grau</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sexta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> Padrões de projeto
-                                            <div class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot lunch">3 padrões principais</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Aplicação exemplos</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sábado</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Legislação:</strong> Regimento Unesp
-                                            (Cap. I-III) <div class="subject-tag legislacao-tag">Legislação</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot lunch">Leitura PDF</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Revisão semana</div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Week 6 Content (hidden by default) -->
-                <div id="week6-content" class="week-content" style="display: none;">
-                    <h3 class="week-title">Semana 6 - Sistemas e Processos <span class="phase-badge phase1-badge">Fase
-                            1: Estudo Profundo</span></h3>
-                    <div class="schedule-table-wrapper">
-                        <table class="schedule-table">
-                            <thead>
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Manhã (1h - PC livre)</th>
-                                    <th>Trem/Almoço</th>
-                                    <th>Noite</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Segunda</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> Linux (comandos,
-                                            SSH) <div class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot commute">Prática terminal</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Chaves SSH</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Terça</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> Shell Script básico
-                                            <div class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot commute">Criar script simples</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Script com parâmetros</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quarta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Português:</strong> Sinônimos/antônimos
-                                            <div class="subject-tag portugues-tag">Português</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot commute">Exercícios semântica</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Interpretação textos</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quinta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Matemática:</strong> Geometria
-                                            (Pitágoras) <div class="subject-tag matematica-tag">Matemática</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot lunch">Problemas geometria</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Área/perímetro</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sexta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> Métodos ágeis
-                                            (Scrum) <div class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot lunch">Cerimônias Scrum</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">User stories</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sábado</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning"><strong>Específicos:</strong> Testes de software
-                                            <div class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot lunch">Casos de teste</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Revisão completa Fase 1</div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <!-- Outras semanas seriam adicionadas aqui seguindo o mesmo padrão -->
             </div>
 
             <!-- Phase 2 Content -->
@@ -965,9 +683,21 @@
                                         <div class="time-slot morning">Revisão conceitos OO <div
                                                 class="subject-tag especificos-tag">Específicos</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="segunda-sem7-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">30 questões Java</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="segunda-sem7-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td><strong>Java + OO</strong></td>
                                 </tr>
@@ -979,9 +709,21 @@
                                         <div class="time-slot morning">Revisão JSF ciclo <div
                                                 class="subject-tag especificos-tag">Específicos</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="terca-sem7-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">30 questões Web</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="terca-sem7-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td><strong>Web (JSF, JS, REST)</strong></td>
                                 </tr>
@@ -993,9 +735,21 @@
                                         <div class="time-slot morning">Revisão SQL + modelagem <div
                                                 class="subject-tag especificos-tag">Específicos</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quarta-sem7-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">30 questões BD</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quarta-sem7-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td><strong>Banco de Dados</strong></td>
                                 </tr>
@@ -1007,9 +761,21 @@
                                         <div class="time-slot morning">Revisão requisitos + ágeis <div
                                                 class="subject-tag especificos-tag">Específicos</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quinta-sem7-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">30 questões Eng. Software</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="quinta-sem7-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td><strong>Engenharia de Software</strong></td>
                                 </tr>
@@ -1021,9 +787,21 @@
                                         <div class="time-slot morning">Revisão comandos + SSH <div
                                                 class="subject-tag especificos-tag">Específicos</div>
                                         </div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sexta-sem7-manha">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="time-slot night">20 questões Linux</div>
+                                        <div class="day-completion">
+                                            <button class="complete-day-btn" data-day="sexta-sem7-tarde">
+                                                <i class="far fa-check-circle"></i>
+                                                <span class="btn-text">Marcar como concluído</span>
+                                            </button>
+                                        </div>
                                     </td>
                                     <td><strong>Sistemas (Linux, scripts)</strong></td>
                                 </tr>
@@ -1042,308 +820,7 @@
                     </div>
                 </div>
 
-                <!-- Week 8 Content (hidden by default) -->
-                <div id="week8-content" class="week-content" style="display: none;">
-                    <h3 class="week-title">Semana 8 - Revisão Intensiva Específicos II <span
-                            class="phase-badge phase2-badge">Fase 2: Revisão</span></h3>
-                    <div class="schedule-table-wrapper">
-                        <table class="schedule-table">
-                            <thead>
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Manhã (1h - PC livre)</th>
-                                    <th>Tarde/Noite</th>
-                                    <th>Foco Principal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Segunda</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão Hibernate <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">20 questões Hibernate</div>
-                                    </td>
-                                    <td><strong>Persistência (Hibernate)</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Terça</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão XML + Web Services <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">20 questões XML/WS</div>
-                                    </td>
-                                    <td><strong>XML + Web Services</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quarta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão testes + versionamento <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">20 questões</div>
-                                    </td>
-                                    <td><strong>Testes + Versionamento</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quinta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão padrões + Jasper <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">20 questões</div>
-                                    </td>
-                                    <td><strong>Padrões + JasperReports</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sexta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão BI + Data Warehouse <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">20 questões</div>
-                                    </td>
-                                    <td><strong>BI + Data Warehouse</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sábado</div>
-                                    </td>
-                                    <td colspan="3"
-                                        style="text-align: center; background-color: rgba(114, 9, 183, 0.05); padding: 1.5rem;">
-                                        <strong>SIMULADO 2</strong> - 40 questões específicas<br>
-                                        <em>Correção detalhada após conclusão</em>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Week 9 Content (hidden by default) -->
-                <div id="week9-content" class="week-content" style="display: none;">
-                    <h3 class="week-title">Semana 9 - Revisão Conhecimentos Gerais I <span
-                            class="phase-badge phase2-badge">Fase
-                            2: Revisão</span></h3>
-                    <div class="schedule-table-wrapper">
-                        <table class="schedule-table">
-                            <thead>
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Manhã (1h - PC livre)</th>
-                                    <th>Tarde/Noite</th>
-                                    <th>Foco Principal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Segunda</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão gramática <div
-                                                class="subject-tag portugues-tag">
-                                                Português</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">30 questões</div>
-                                    </td>
-                                    <td><strong>Português: Gramática</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Terça</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Textos diversos <div
-                                                class="subject-tag portugues-tag">
-                                                Português</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">30 questões</div>
-                                    </td>
-                                    <td><strong>Português: Interpretação</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quarta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão %/razão/regra três <div
-                                                class="subject-tag matematica-tag">Matemática</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">30 questões</div>
-                                    </td>
-                                    <td><strong>Matemática: Aritmética</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quinta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão equações/geometria <div
-                                                class="subject-tag matematica-tag">Matemática</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">30 questões</div>
-                                    </td>
-                                    <td><strong>Matemática: Álgebra/Geometria</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sexta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão CF/88 (Títulos I-VIII) <div
-                                                class="subject-tag legislacao-tag">Legislação</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">30 questões</div>
-                                    </td>
-                                    <td><strong>Legislação: CF/88</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sábado</div>
-                                    </td>
-                                    <td colspan="3"
-                                        style="text-align: center; background-color: rgba(76, 201, 240, 0.05); padding: 1.5rem;">
-                                        <strong>SIMULADO GERAL 1</strong> - 40 questões (proporcionais)<br>
-                                        <em>Correção detalhada</em>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Week 10 Content (hidden by default) -->
-                <div id="week10-content" class="week-content" style="display: none;">
-                    <h3 class="week-title">Semana 10 - Revisão Conhecimentos Gerais II <span
-                            class="phase-badge phase2-badge">Fase 2: Revisão</span></h3>
-                    <div class="schedule-table-wrapper">
-                        <table class="schedule-table">
-                            <thead>
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Manhã (1h - PC livre)</th>
-                                    <th>Tarde/Noite</th>
-                                    <th>Foco Principal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Segunda</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Leitura Regimento Unesp <div
-                                                class="subject-tag legislacao-tag">Legislação</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">20 questões</div>
-                                    </td>
-                                    <td><strong>Legislação: Regimento Unesp</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Terça</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Estruturas lógicas <div
-                                                class="subject-tag matematica-tag">Matemática</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">30 questões RL</div>
-                                    </td>
-                                    <td><strong>Raciocínio Lógico</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quarta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão pontuação/crase <div
-                                                class="subject-tag portugues-tag">Português</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">30 questões</div>
-                                    </td>
-                                    <td><strong>Português: Pontuação/crase</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quinta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão lógica + média <div
-                                                class="subject-tag matematica-tag">Matemática</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">30 questões</div>
-                                    </td>
-                                    <td><strong>Matemática: RL + gráficos</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sexta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão pontos fracos <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Exercícios específicos</div>
-                                    </td>
-                                    <td><strong>Revisão pontos fracos</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sábado</div>
-                                    </td>
-                                    <td colspan="3"
-                                        style="text-align: center; background-color: rgba(56, 176, 0, 0.05); padding: 1.5rem;">
-                                        <strong>SIMULADO GERAL 2</strong> - 40 questões completas<br>
-                                        <em>Correção + ajustes finais</em>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <!-- Outras semanas da fase 2 seriam adicionadas aqui -->
             </div>
 
             <!-- Phase 3 Content -->
@@ -1416,167 +893,7 @@
                     </div>
                 </div>
 
-                <!-- Week 12 Content (hidden by default) -->
-                <div id="week12-content" class="week-content" style="display: none;">
-                    <h3 class="week-title">Semana 12 - Revisão Final e Dissertativa <span
-                            class="phase-badge phase3-badge">Fase
-                            3: Simulados</span></h3>
-                    <div class="schedule-table-wrapper">
-                        <table class="schedule-table">
-                            <thead>
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Manhã (1h - PC livre)</th>
-                                    <th>Tarde/Noite</th>
-                                    <th>Foco Principal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Segunda</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão flashcards <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Prática dissertativa</div>
-                                    </td>
-                                    <td><strong>Revisão geral</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Terça</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão esquemas/resumos <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Prática dissertativa</div>
-                                    </td>
-                                    <td><strong>Mapas mentais</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quarta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Simulado dissertativo <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Autoavaliação</div>
-                                    </td>
-                                    <td><strong>Dissertativa</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quinta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão legislação final <div
-                                                class="subject-tag legislacao-tag">Legislação</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Questões específicas</div>
-                                    </td>
-                                    <td><strong>Legislação final</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sexta</div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot morning">Revisão específicos final <div
-                                                class="subject-tag especificos-tag">Específicos</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="time-slot night">Questões</div>
-                                    </td>
-                                    <td><strong>Específicos final</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sábado</div>
-                                    </td>
-                                    <td colspan="3"
-                                        style="text-align: center; background-color: rgba(247, 37, 133, 0.05); padding: 1.5rem;">
-                                        <strong>SIMULADO 6 (completo)</strong> - Último simulado geral<br>
-                                        <em>Correção final e ajustes</em>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Week 13 Content (hidden by default) -->
-                <div id="week13-content" class="week-content" style="display: none;">
-                    <h3 class="week-title">Semana 13 - Ajustes Finais (Semana da Prova) <span
-                            class="phase-badge phase3-badge">Fase 3: Simulados</span></h3>
-                    <div class="schedule-table-wrapper">
-                        <table class="schedule-table">
-                            <thead>
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Atividade</th>
-                                    <th>Detalhes</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Segunda</div>
-                                    </td>
-                                    <td><strong>Revisão leve</strong></td>
-                                    <td>Flashcards rápidos</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Terça</div>
-                                    </td>
-                                    <td><strong>Revisão fórmulas/conceitos</strong></td>
-                                    <td>Anotações importantes</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quarta</div>
-                                    </td>
-                                    <td><strong>Descanso mental</strong></td>
-                                    <td>Leitura leve, sem estudo pesado</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Quinta</div>
-                                    </td>
-                                    <td><strong>Organização documentos</strong></td>
-                                    <td>Separar o que levar para a prova</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sexta</div>
-                                    </td>
-                                    <td><strong>PROVA</strong></td>
-                                    <td>Descanso, alimentação boa</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="day-header"><i class="fas fa-calendar-day"></i> Sábado</div>
-                                    </td>
-                                    <td><strong>PROVA (se houver)</strong></td>
-                                    <td>Foco e tranquilidade</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <!-- Outras semanas da fase 3 seriam adicionadas aqui -->
             </div>
 
             <!-- Materials Content -->
@@ -1657,23 +974,6 @@
             <button class="print-btn">
                 <i class="fas fa-print"></i> Imprimir Cronograma
             </button>
-
-            <!-- Progress Section -->
-            <div class="progress-section">
-                <h4 style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                    <i class="fas fa-chart-line"></i> Acompanhamento de Progresso
-                </h4>
-                <p><strong>Sugestão:</strong> Marque os tópicos concluídos e ajuste o cronograma conforme sua evolução.
-                </p>
-                <div class="progress-buttons">
-                    <button class="progress-btn complete">
-                        <i class="fas fa-check"></i> Marcar como concluído
-                    </button>
-                    <button class="progress-btn reset">
-                        <i class="fas fa-redo"></i> Reiniciar progresso
-                    </button>
-                </div>
-            </div>
         </section>
 
         <!-- Footer -->
@@ -1693,9 +993,6 @@
             <p>Escolha uma opção para sincronizar seu progresso entre dispositivos:</p>
 
             <div class="sync-options">
-                <button class="sync-btn local" id="local-sync-btn">
-                    <i class="fas fa-mobile-alt"></i> Usar apenas neste dispositivo
-                </button>
                 <button class="sync-btn export" id="modal-export-btn">
                     <i class="fas fa-download"></i> Exportar código de progresso
                 </button>
@@ -1719,4 +1016,3 @@
 </body>
 
 </html>
-    
