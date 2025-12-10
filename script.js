@@ -23,7 +23,7 @@ class ProgressManager {
         this.progress = {
           days: {},
           lastUpdated: new Date().toISOString(),
-          totalDays: 234, // Total estimado de períodos de estudo
+          totalDays: 234,
           completedDays: 0,
         };
       }
@@ -511,7 +511,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Adicionar data estimada da prova
   const today = new Date();
   const examDate = new Date(today);
-  examDate.setDate(today.getDate() + 13 * 7 - 3); // 13 semanas a partir de hoje, menos 3 dias
+  examDate.setDate(today.getDate() + 13 * 7);
 
   const options = {
     weekday: "long",
